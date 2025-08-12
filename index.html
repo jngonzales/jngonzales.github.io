@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Full Stack Developer</title>
+    <title>Your Name - Freelance Tech Specialist</title>
     <style>
+        :root {
+            /* Light mode colors (default) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --accent-primary: #3498db;
+            --accent-secondary: #e74c3c;
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode colors */
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-primary: #4a9eff;
+            --accent-secondary: #ff6b6b;
+            --card-bg: #2d2d2d;
+            --border-color: #404040;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,9 +41,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            overflow-x: hidden;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -24,227 +53,399 @@
             padding: 0 20px;
         }
 
-        /* Navigation */
-        nav {
+        /* Header with controls */
+        header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
         }
 
-        nav.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-        }
-
-        .nav-content {
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent-primary);
         }
 
-        .nav-links {
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::before {
+            transform: translateX(26px);
+        }
+
+        /* Language Dropdown */
+        .language-dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-trigger:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+            z-index: 1001;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        /* Navigation */
+        .nav-menu {
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
 
-        .nav-links a {
-            color: white;
+        .nav-menu a {
+            color: var(--text-primary);
             text-decoration: none;
             transition: color 0.3s ease;
             position: relative;
         }
 
-        .nav-links a:hover {
-            color: #4ecdc4;
+        .nav-menu a:hover {
+            color: var(--accent-primary);
         }
 
-        .nav-links a::after {
+        .nav-menu a::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
             bottom: -5px;
             left: 0;
-            background: #4ecdc4;
+            background: var(--accent-primary);
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
+        .nav-menu a:hover::after {
             width: 100%;
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            padding: 120px 0 80px;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 300px 1fr;
+            gap: 2rem;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content h1 {
             font-size: 4rem;
+            margin: 0 auto;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-cta {
+            text-align: right;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            font-weight: bold;
         }
 
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease 0.3s both;
+            font-style: italic;
         }
 
-        .hero-buttons {
+        .hero-tagline {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
             display: flex;
+            flex-direction: column;
             gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 1s ease 0.6s both;
         }
 
         .btn {
             padding: 1rem 2rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Floating particles */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         /* Sections */
         .section {
-            padding: 5rem 0;
-            background: white;
-            color: #333;
+            padding: 4rem 0;
         }
 
         .section:nth-child(even) {
-            background: #f8f9fa;
+            background: var(--bg-secondary);
         }
 
         .section-title {
+            font-size: 2.5rem;
             text-align: center;
-            font-size: 3rem;
             margin-bottom: 3rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent-primary);
+            position: relative;
         }
 
-        /* Skills */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
-        .skill-card {
-            background: white;
+        .skill-category {
+            background: var(--card-bg);
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow);
+            border: 1px solid var(--border-color);
         }
 
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .skill-icon {
-            font-size: 3rem;
+        .skill-category h3 {
+            color: var(--accent-primary);
             margin-bottom: 1rem;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 1rem;
+        .skill-category ul {
+            list-style: none;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            border-radius: 5px;
-            transition: width 2s ease;
-            width: 0;
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
         }
 
-        /* Projects */
-        .projects-grid {
+        .skill-category li::before {
+            content: '•';
+            color: var(--accent-secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
-        .project-card {
-            background: white;
-            border-radius: 15px;
+        .portfolio-card {
+            background: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px var(--shadow);
             transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
+        .portfolio-card:hover {
+            transform: translateY(-5px);
         }
 
-        .project-image {
+        .portfolio-image {
             height: 200px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: var(--gradient);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -252,72 +453,156 @@
             color: white;
         }
 
-        .project-content {
+        .portfolio-content {
             padding: 1.5rem;
         }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .tag {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .project-links {
+        .portfolio-links {
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
         }
 
-        .project-links a {
-            color: #667eea;
+        .portfolio-links a {
+            color: var(--accent-primary);
             text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-primary);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .testimonial-author {
             font-weight: bold;
-            transition: color 0.3s ease;
+            color: var(--accent-primary);
         }
 
-        .project-links a:hover {
-            color: #764ba2;
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            text-align: center;
         }
 
-        /* Contact */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
+        .contact-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow);
+            border: 1px solid var(--border-color);
         }
 
-        .form-group {
-            margin-bottom: 2rem;
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
+        .contact-item a {
+            color: var(--text-primary);
+            text-decoration: none;
         }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+        .contact-item a:hover {
+            color: var(--accent-primary);
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .header-controls {
+                order: -1;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                border-top: 1px solid var(--border-color);
+                padding: 1rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text, .hero-cta {
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-photo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .services-grid,
+            .skills-grid,
+            .portfolio-grid,
+            .testimonials-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Animations */
@@ -332,163 +617,217 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+        .fade-in {
+            animation: fadeInUp 0.6s ease;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+        /* Loading animation for theme transitions */
+        .theme-transition {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body>
-    <nav id="navbar">
-        <div class="nav-content">
-            <div class="logo">Your Name</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+<body data-theme="light" class="theme-transition">
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-controls">
+                    <div class="theme-toggle">
+                        <span data-i18n="light">Light</span>
+                        <div class="toggle-switch" id="themeToggle"></div>
+                        <span data-i18n="dark">Dark</span>
+                    </div>
+                    
+                    <div class="language-dropdown">
+                        <div class="dropdown-trigger" id="languageDropdown">
+                            <span id="currentLang">🇺🇸 English</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="languageMenu">
+                            <div class="dropdown-item" data-lang="en">🇺🇸 English</div>
+                            <div class="dropdown-item" data-lang="es">🇪🇸 Español</div>
+                            <div class="dropdown-item" data-lang="fr">🇫🇷 Français</div>
+                            <div class="dropdown-item" data-lang="de">🇩🇪 Deutsch</div>
+                            <div class="dropdown-item" data-lang="ja">🇯🇵 日本語</div>
+                            <div class="dropdown-item" data-lang="zh">🇨🇳 中文</div>
+                            <div class="dropdown-item" data-lang="pt">🇵🇹 Português</div>
+                            <div class="dropdown-item" data-lang="ru">🇷🇺 Русский</div>
+                            <div class="dropdown-item" data-lang="ar">🇸🇦 العربية</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <div class="logo">Your Name</div>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <a href="#about" data-i18n="nav-about">About</a>
+                    <a href="#services" data-i18n="nav-services">Services</a>
+                    <a href="#skills" data-i18n="nav-skills">Skills</a>
+                    <a href="#portfolio" data-i18n="nav-portfolio">Portfolio</a>
+                    <a href="#contact" data-i18n="nav-contact">Contact</a>
+                </nav>
+            </div>
         </div>
-    </nav>
+    </header>
 
-    <section id="home" class="hero">
-        <div class="particles">
-            <!-- Particles will be generated by JavaScript -->
-        </div>
-        <div class="hero-content">
-            <h1>Full Stack Developer</h1>
-            <p>Building amazing digital experiences with modern technologies</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="hero-text">
+                    <h1 data-i18n="hero-name">Your Name</h1>
+                    <p class="hero-subtitle" data-i18n="hero-title">Freelance Tech Specialist | Digital Solutions Provider</p>
+                    <p class="hero-tagline" data-i18n="hero-tagline">"I turn ideas into efficient digital solutions."</p>
+                    <p data-i18n="hero-skills">Coding • Tech Support • Digital Problem-Solving</p>
+                </div>
+                
+                <div class="hero-photo">
+                    📷
+                    <!-- Replace with: <img src="your-photo.jpg" alt="Your Name" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"> -->
+                </div>
+                
+                <div class="hero-cta">
+                    <div class="cta-buttons">
+                        <a href="#portfolio" class="btn btn-primary" data-i18n="hero-cta-work">View My Work</a>
+                        <a href="#contact" class="btn btn-primary" data-i18n="hero-cta-contact">Get In Touch</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.6;">
-                <p>I'm a passionate full-stack developer with expertise in modern web technologies. I love creating interactive, user-friendly applications that solve real-world problems. From responsive websites to complex data analysis tools, I bring ideas to life through code.</p>
+            <h2 class="section-title" data-i18n="about-title">About Me</h2>
+            <div class="about-content">
+                <p data-i18n="about-text">I'm a results-driven freelance tech specialist with expertise in coding, troubleshooting, and delivering a wide range of digital solutions. Whether it's building a website, automating tasks, or providing technical support, I focus on creating efficient, practical, and reliable outcomes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="services-title">Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3 data-i18n="service-web-title">Web Development</h3>
+                    <p data-i18n="service-web-desc">Clean, responsive websites</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 data-i18n="service-automation-title">Automation & Scripting</h3>
+                    <p data-i18n="service-automation-desc">Save time with smart scripts</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🖥️</div>
+                    <h3 data-i18n="service-support-title">Technical Support</h3>
+                    <p data-i18n="service-support-desc">Troubleshooting and optimization</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 data-i18n="service-data-title">Data & Admin Tasks</h3>
+                    <p data-i18n="service-data-desc">Organized, accurate, efficient</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
+            <h2 class="section-title" data-i18n="skills-title">Skills</h2>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">🌐</div>
-                    <h3>Frontend Development</h3>
-                    <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="90"></div>
+                <div class="skill-category">
+                    <h3 data-i18n="skills-programming">Programming</h3>
+                    <ul>
+                        <li data-i18n="skill-python">Python</li>
+                        <li data-i18n="skill-javascript">JavaScript</li>
+                        <li data-i18n="skill-html-css">HTML/CSS</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="skills-tech-tools">Tech Tools</h3>
+                    <ul>
+                        <li data-i18n="skill-git">Git</li>
+                        <li data-i18n="skill-google">Google Workspace</li>
+                        <li data-i18n="skill-microsoft">Microsoft Office</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="skills-problem-solving">Problem-Solving</h3>
+                    <ul>
+                        <li data-i18n="skill-optimization">System optimization</li>
+                        <li data-i18n="skill-workflow">Workflow automation</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="skills-soft">Soft Skills</h3>
+                    <ul>
+                        <li data-i18n="skill-communication">Communication</li>
+                        <li data-i18n="skill-time">Time management</li>
+                        <li data-i18n="skill-adaptability">Adaptability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="portfolio-title">Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-image">🌐</div>
+                    <div class="portfolio-content">
+                        <h3 data-i18n="portfolio-web-title">Website Projects</h3>
+                        <p data-i18n="portfolio-web-desc">Responsive websites built with modern technologies</p>
+                        <div class="portfolio-links">
+                            <a href="#" data-i18n="portfolio-demo">Live Demo</a>
+                            <a href="#" data-i18n="portfolio-code">View Code</a>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⚙️</div>
-                    <h3>Backend Development</h3>
-                    <p>Node.js, Python, PHP, Express, Django</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="85"></div>
+                <div class="portfolio-card">
+                    <div class="portfolio-image">🤖</div>
+                    <div class="portfolio-content">
+                        <h3 data-i18n="portfolio-automation-title">Scripts/Automation Projects</h3>
+                        <p data-i18n="portfolio-automation-desc">Automated workflows that save time and increase efficiency</p>
+                        <div class="portfolio-links">
+                            <a href="#" data-i18n="portfolio-demo">Live Demo</a>
+                            <a href="#" data-i18n="portfolio-code">View Code</a>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🗄️</div>
-                    <h3>Database Management</h3>
-                    <p>MySQL, PostgreSQL, MongoDB, Firebase</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="80"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📊</div>
-                    <h3>Data Analysis</h3>
-                    <p>Excel, Python, R, Data Visualization</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="88"></div>
+                <div class="portfolio-card">
+                    <div class="portfolio-image">🛠️</div>
+                    <div class="portfolio-content">
+                        <h3 data-i18n="portfolio-support-title">Tech Support Cases</h3>
+                        <p data-i18n="portfolio-support-desc">Before/after examples of system optimizations and fixes</p>
+                        <div class="portfolio-links">
+                            <a href="#" data-i18n="portfolio-case-study">Case Study</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="section">
+    <section class="section">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">🚀</div>
-                    <div class="project-content">
-                        <h3>E-Commerce Platform</h3>
-                        <p>Full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.</p>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">Stripe API</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" onclick="showDemo()">Live Demo</a>
-                            <a href="#" onclick="showCode()">View Code</a>
-                        </div>
-                    </div>
+            <h2 class="section-title" data-i18n="testimonials-title">Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text" data-i18n="testimonial-1-text">Reliable, fast, and understands what I need.</p>
+                    <p class="testimonial-author" data-i18n="testimonial-1-author">– Client Name</p>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">📈</div>
-                    <div class="project-content">
-                        <h3>Data Analytics Dashboard</h3>
-                        <p>Interactive dashboard for business intelligence with real-time charts, filters, and export capabilities.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Flask</span>
-                            <span class="tag">Chart.js</span>
-                            <span class="tag">PostgreSQL</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" onclick="showDemo()">Live Demo</a>
-                            <a href="#" onclick="showCode()">View Code</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">📱</div>
-                    <div class="project-content">
-                        <h3>Task Management App</h3>
-                        <p>Collaborative task management application with real-time updates, notifications, and team features.</p>
-                        <div class="project-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">Express</span>
-                            <span class="tag">Socket.io</span>
-                            <span class="tag">MySQL</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" onclick="showDemo()">Live Demo</a>
-                            <a href="#" onclick="showCode()">View Code</a>
-                        </div>
-                    </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text" data-i18n="testimonial-2-text">Made my workflow 3x faster with automation.</p>
+                    <p class="testimonial-author" data-i18n="testimonial-2-author">– Client Name</p>
                 </div>
             </div>
         </div>
@@ -496,121 +835,761 @@
 
     <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+            <h2 class="section-title" data-i18n="contact-title">Contact Me</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3 data-i18n="contact-email">Email</h3>
+                    <a href="mailto:your@email.com">your@email.com</a>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <h3 data-i18n="contact-portfolio">Portfolio Link</h3>
+                    <a href="#">yourwebsite.com</a>
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                </div>
-                <div style="text-align: center;">
-                    <button type="button" class="btn btn-primary" onclick="sendMessage()">Send Message</button>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <h3 data-i18n="contact-freelance">Freelance Platforms</h3>
+                    <a href="#" data-i18n="contact-upwork">Upwork Profile</a>
                 </div>
             </div>
         </div>
     </section>
 
     <script>
+        // Translations object
+        const translations = {
+            en: {
+                'light': 'Light',
+                'dark': 'Dark',
+                'nav-about': 'About',
+                'nav-services': 'Services',
+                'nav-skills': 'Skills',
+                'nav-portfolio': 'Portfolio',
+                'nav-contact': 'Contact',
+                'hero-name': 'Your Name',
+                'hero-title': 'Freelance Tech Specialist | Digital Solutions Provider',
+                'hero-tagline': '"I turn ideas into efficient digital solutions."',
+                'hero-skills': 'Coding • Tech Support • Digital Problem-Solving',
+                'hero-cta-work': 'View My Work',
+                'hero-cta-contact': 'Get In Touch',
+                'about-title': 'About Me',
+                'about-text': 'I\'m a results-driven freelance tech specialist with expertise in coding, troubleshooting, and delivering a wide range of digital solutions. Whether it\'s building a website, automating tasks, or providing technical support, I focus on creating efficient, practical, and reliable outcomes.',
+                'services-title': 'Services',
+                'service-web-title': 'Web Development',
+                'service-web-desc': 'Clean, responsive websites',
+                'service-automation-title': 'Automation & Scripting',
+                'service-automation-desc': 'Save time with smart scripts',
+                'service-support-title': 'Technical Support',
+                'service-support-desc': 'Troubleshooting and optimization',
+                'service-data-title': 'Data & Admin Tasks',
+                'service-data-desc': 'Organized, accurate, efficient',
+                'skills-title': 'Skills',
+                'skills-programming': 'Programming',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': 'Tech Tools',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': 'Problem-Solving',
+                'skill-optimization': 'System optimization',
+                'skill-workflow': 'Workflow automation',
+                'skills-soft': 'Soft Skills',
+                'skill-communication': 'Communication',
+                'skill-time': 'Time management',
+                'skill-adaptability': 'Adaptability',
+                'portfolio-title': 'Portfolio',
+                'portfolio-web-title': 'Website Projects',
+                'portfolio-web-desc': 'Responsive websites built with modern technologies',
+                'portfolio-automation-title': 'Scripts/Automation Projects',
+                'portfolio-automation-desc': 'Automated workflows that save time and increase efficiency',
+                'portfolio-support-title': 'Tech Support Cases',
+                'portfolio-support-desc': 'Before/after examples of system optimizations and fixes',
+                'portfolio-demo': 'Live Demo',
+                'portfolio-code': 'View Code',
+                'portfolio-case-study': 'Case Study',
+                'testimonials-title': 'Testimonials',
+                'testimonial-1-text': 'Reliable, fast, and understands what I need.',
+                'testimonial-1-author': '– Client Name',
+                'testimonial-2-text': 'Made my workflow 3x faster with automation.',
+                'testimonial-2-author': '– Client Name',
+                'contact-title': 'Contact Me',
+                'contact-email': 'Email',
+                'contact-portfolio': 'Portfolio Link',
+                'contact-freelance': 'Freelance Platforms',
+                'contact-upwork': 'Upwork Profile'
+            },
+            es: {
+                'light': 'Claro',
+                'dark': 'Oscuro',
+                'nav-about': 'Acerca de',
+                'nav-services': 'Servicios',
+                'nav-skills': 'Habilidades',
+                'nav-portfolio': 'Portafolio',
+                'nav-contact': 'Contacto',
+                'hero-name': 'Tu Nombre',
+                'hero-title': 'Especialista Técnico Freelance | Proveedor de Soluciones Digitales',
+                'hero-tagline': '"Convierto ideas en soluciones digitales eficientes."',
+                'hero-skills': 'Programación • Soporte Técnico • Resolución de Problemas Digitales',
+                'hero-cta-work': 'Ver Mi Trabajo',
+                'hero-cta-contact': 'Ponte en Contacto',
+                'about-title': 'Acerca de Mí',
+                'about-text': 'Soy un especialista técnico freelance orientado a resultados con experiencia en programación, resolución de problemas y entrega de una amplia gama de soluciones digitales. Ya sea construyendo un sitio web, automatizando tareas o brindando soporte técnico, me enfoco en crear resultados eficientes, prácticos y confiables.',
+                'services-title': 'Servicios',
+                'service-web-title': 'Desarrollo Web',
+                'service-web-desc': 'Sitios web limpios y responsivos',
+                'service-automation-title': 'Automatización y Scripts',
+                'service-automation-desc': 'Ahorra tiempo con scripts inteligentes',
+                'service-support-title': 'Soporte Técnico',
+                'service-support-desc': 'Resolución de problemas y optimización',
+                'service-data-title': 'Datos y Tareas Administrativas',
+                'service-data-desc': 'Organizado, preciso, eficiente',
+                'skills-title': 'Habilidades',
+                'skills-programming': 'Programación',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': 'Herramientas Técnicas',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': 'Resolución de Problemas',
+                'skill-optimization': 'Optimización de sistemas',
+                'skill-workflow': 'Automatización de flujos de trabajo',
+                'skills-soft': 'Habilidades Blandas',
+                'skill-communication': 'Comunicación',
+                'skill-time': 'Gestión del tiempo',
+                'skill-adaptability': 'Adaptabilidad',
+                'portfolio-title': 'Portafolio',
+                'portfolio-web-title': 'Proyectos Web',
+                'portfolio-web-desc': 'Sitios web responsivos construidos con tecnologías modernas',
+                'portfolio-automation-title': 'Proyectos de Scripts/Automatización',
+                'portfolio-automation-desc': 'Flujos de trabajo automatizados que ahorran tiempo y aumentan la eficiencia',
+                'portfolio-support-title': 'Casos de Soporte Técnico',
+                'portfolio-support-desc': 'Ejemplos antes/después de optimizaciones y correcciones de sistemas',
+                'portfolio-demo': 'Demo en Vivo',
+                'portfolio-code': 'Ver Código',
+                'portfolio-case-study': 'Caso de Estudio',
+                'testimonials-title': 'Testimonios',
+                'testimonial-1-text': 'Confiable, rápido y entiende lo que necesito.',
+                'testimonial-1-author': '– Nombre del Cliente',
+                'testimonial-2-text': 'Hizo que mi flujo de trabajo fuera 3 veces más rápido con automatización.',
+                'testimonial-2-author': '– Nombre del Cliente',
+                'contact-title': 'Contáctame',
+                'contact-email': 'Correo',
+                'contact-portfolio': 'Enlace del Portafolio',
+                'contact-freelance': 'Plataformas Freelance',
+                'contact-upwork': 'Perfil de Upwork'
+            },
+            fr: {
+                'light': 'Clair',
+                'dark': 'Sombre',
+                'nav-about': 'À propos',
+                'nav-services': 'Services',
+                'nav-skills': 'Compétences',
+                'nav-portfolio': 'Portfolio',
+                'nav-contact': 'Contact',
+                'hero-name': 'Votre Nom',
+                'hero-title': 'Spécialiste Tech Freelance | Fournisseur de Solutions Digitales',
+                'hero-tagline': '"Je transforme les idées en solutions digitales efficaces."',
+                'hero-skills': 'Programmation • Support Technique • Résolution de Problèmes Digitaux',
+                'hero-cta-work': 'Voir Mon Travail',
+                'hero-cta-contact': 'Me Contacter',
+                'about-title': 'À Propos de Moi',
+                'about-text': 'Je suis un spécialiste technique freelance axé sur les résultats avec une expertise en programmation, dépannage et livraison d\'une large gamme de solutions numériques. Qu\'il s\'agisse de construire un site web, d\'automatiser des tâches ou de fournir un support technique, je me concentre sur la création de résultats efficaces, pratiques et fiables.',
+                'services-title': 'Services',
+                'service-web-title': 'Développement Web',
+                'service-web-desc': 'Sites web propres et responsives',
+                'service-automation-title': 'Automatisation et Scripts',
+                'service-automation-desc': 'Économisez du temps avec des scripts intelligents',
+                'service-support-title': 'Support Technique',
+                'service-support-desc': 'Dépannage et optimisation',
+                'service-data-title': 'Données et Tâches Administratives',
+                'service-data-desc': 'Organisé, précis, efficace',
+                'skills-title': 'Compétences',
+                'skills-programming': 'Programmation',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': 'Outils Techniques',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': 'Résolution de Problèmes',
+                'skill-optimization': 'Optimisation de systèmes',
+                'skill-workflow': 'Automatisation des flux de travail',
+                'skills-soft': 'Compétences Relationnelles',
+                'skill-communication': 'Communication',
+                'skill-time': 'Gestion du temps',
+                'skill-adaptability': 'Adaptabilité',
+                'portfolio-title': 'Portfolio',
+                'portfolio-web-title': 'Projets Web',
+                'portfolio-web-desc': 'Sites web responsives construits avec des technologies modernes',
+                'portfolio-automation-title': 'Projets Scripts/Automatisation',
+                'portfolio-automation-desc': 'Flux de travail automatisés qui font gagner du temps et augmentent l\'efficacité',
+                'portfolio-support-title': 'Cas de Support Technique',
+                'portfolio-support-desc': 'Exemples avant/après d\'optimisations et de corrections de systèmes',
+                'portfolio-demo': 'Démo Live',
+                'portfolio-code': 'Voir le Code',
+                'portfolio-case-study': 'Étude de Cas',
+                'testimonials-title': 'Témoignages',
+                'testimonial-1-text': 'Fiable, rapide et comprend ce dont j\'ai besoin.',
+                'testimonial-1-author': '– Nom du Client',
+                'testimonial-2-text': 'A rendu mon flux de travail 3 fois plus rapide avec l\'automatisation.',
+                'testimonial-2-author': '– Nom du Client',
+                'contact-title': 'Me Contacter',
+                'contact-email': 'Email',
+                'contact-portfolio': 'Lien Portfolio',
+                'contact-freelance': 'Plateformes Freelance',
+                'contact-upwork': 'Profil Upwork'
+            },
+            de: {
+                'light': 'Hell',
+                'dark': 'Dunkel',
+                'nav-about': 'Über mich',
+                'nav-services': 'Dienste',
+                'nav-skills': 'Fähigkeiten',
+                'nav-portfolio': 'Portfolio',
+                'nav-contact': 'Kontakt',
+                'hero-name': 'Ihr Name',
+                'hero-title': 'Freelance Tech-Spezialist | Anbieter digitaler Lösungen',
+                'hero-tagline': '"Ich verwandle Ideen in effiziente digitale Lösungen."',
+                'hero-skills': 'Programmierung • Tech-Support • Digitale Problemlösung',
+                'hero-cta-work': 'Meine Arbeit ansehen',
+                'hero-cta-contact': 'Kontakt aufnehmen',
+                'about-title': 'Über Mich',
+                'about-text': 'Ich bin ein ergebnisorientierter Freelance-Tech-Spezialist mit Expertise in Programmierung, Fehlerbehebung und der Bereitstellung einer breiten Palette digitaler Lösungen. Ob beim Erstellen einer Website, beim Automatisieren von Aufgaben oder beim Bereitstellen von technischem Support - ich konzentriere mich darauf, effiziente, praktische und zuverlässige Ergebnisse zu erzielen.',
+                'services-title': 'Dienste',
+                'service-web-title': 'Webentwicklung',
+                'service-web-desc': 'Saubere, responsive Websites',
+                'service-automation-title': 'Automatisierung & Skripte',
+                'service-automation-desc': 'Zeit sparen mit intelligenten Skripten',
+                'service-support-title': 'Technischer Support',
+                'service-support-desc': 'Fehlerbehebung und Optimierung',
+                'service-data-title': 'Daten & Admin-Aufgaben',
+                'service-data-desc': 'Organisiert, genau, effizient',
+                'skills-title': 'Fähigkeiten',
+                'skills-programming': 'Programmierung',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': 'Tech-Tools',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': 'Problemlösung',
+                'skill-optimization': 'Systemoptimierung',
+                'skill-workflow': 'Workflow-Automatisierung',
+                'skills-soft': 'Soft Skills',
+                'skill-communication': 'Kommunikation',
+                'skill-time': 'Zeitmanagement',
+                'skill-adaptability': 'Anpassungsfähigkeit',
+                'portfolio-title': 'Portfolio',
+                'portfolio-web-title': 'Website-Projekte',
+                'portfolio-web-desc': 'Responsive Websites mit modernen Technologien',
+                'portfolio-automation-title': 'Skript-/Automatisierungsprojekte',
+                'portfolio-automation-desc': 'Automatisierte Workflows, die Zeit sparen und Effizienz steigern',
+                'portfolio-support-title': 'Tech-Support-Fälle',
+                'portfolio-support-desc': 'Vorher/Nachher-Beispiele von Systemoptimierungen und Korrekturen',
+                'portfolio-demo': 'Live Demo',
+                'portfolio-code': 'Code ansehen',
+                'portfolio-case-study': 'Fallstudie',
+                'testimonials-title': 'Referenzen',
+                'testimonial-1-text': 'Zuverlässig, schnell und versteht, was ich brauche.',
+                'testimonial-1-author': '– Kundenname',
+                'testimonial-2-text': 'Hat meinen Workflow durch Automatisierung 3x schneller gemacht.',
+                'testimonial-2-author': '– Kundenname',
+                'contact-title': 'Kontakt',
+                'contact-email': 'E-Mail',
+                'contact-portfolio': 'Portfolio-Link',
+                'contact-freelance': 'Freelance-Plattformen',
+                'contact-upwork': 'Upwork-Profil'
+            },
+            ja: {
+                'light': 'ライト',
+                'dark': 'ダーク',
+                'nav-about': 'について',
+                'nav-services': 'サービス',
+                'nav-skills': 'スキル',
+                'nav-portfolio': 'ポートフォリオ',
+                'nav-contact': '連絡先',
+                'hero-name': 'あなたの名前',
+                'hero-title': 'フリーランステック専門家 | デジタルソリューションプロバイダー',
+                'hero-tagline': '"アイデアを効率的なデジタルソリューションに変える"',
+                'hero-skills': 'コーディング • テックサポート • デジタル問題解決',
+                'hero-cta-work': '私の作品を見る',
+                'hero-cta-contact': 'お問い合わせ',
+                'about-title': '私について',
+                'about-text': '私は、コーディング、トラブルシューティング、幅広いデジタルソリューションの提供に専門知識を持つ、結果重視のフリーランステック専門家です。ウェブサイトの構築、タスクの自動化、技術サポートの提供など、効率的で実用的、信頼性の高い成果の創出に重点を置いています。',
+                'services-title': 'サービス',
+                'service-web-title': 'ウェブ開発',
+                'service-web-desc': 'クリーンでレスポンシブなウェブサイト',
+                'service-automation-title': '自動化・スクリプト',
+                'service-automation-desc': 'スマートスクリプトで時間を節約',
+                'service-support-title': '技術サポート',
+                'service-support-desc': 'トラブルシューティングと最適化',
+                'service-data-title': 'データ・管理タスク',
+                'service-data-desc': '整理され、正確で効率的',
+                'skills-title': 'スキル',
+                'skills-programming': 'プログラミング',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': '技術ツール',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': '問題解決',
+                'skill-optimization': 'システム最適化',
+                'skill-workflow': 'ワークフロー自動化',
+                'skills-soft': 'ソフトスキル',
+                'skill-communication': 'コミュニケーション',
+                'skill-time': '時間管理',
+                'skill-adaptability': '適応性',
+                'portfolio-title': 'ポートフォリオ',
+                'portfolio-web-title': 'ウェブサイトプロジェクト',
+                'portfolio-web-desc': 'モダンテクノロジーで構築されたレスポンシブウェブサイト',
+                'portfolio-automation-title': 'スクリプト・自動化プロジェクト',
+                'portfolio-automation-desc': '時間を節約し効率を向上させる自動化ワークフロー',
+                'portfolio-support-title': '技術サポートケース',
+                'portfolio-support-desc': 'システム最適化と修正のビフォー・アフター例',
+                'portfolio-demo': 'ライブデモ',
+                'portfolio-code': 'コードを見る',
+                'portfolio-case-study': 'ケーススタディ',
+                'testimonials-title': '推薦',
+                'testimonial-1-text': '信頼できて、迅速で、私が必要とすることを理解してくれる。',
+                'testimonial-1-author': '– クライアント名',
+                'testimonial-2-text': '自動化により私のワークフローを3倍速くしてくれた。',
+                'testimonial-2-author': '– クライアント名',
+                'contact-title': '連絡先',
+                'contact-email': 'メール',
+                'contact-portfolio': 'ポートフォリオリンク',
+                'contact-freelance': 'フリーランスプラットフォーム',
+                'contact-upwork': 'Upworkプロフィール'
+            },
+            zh: {
+                'light': '浅色',
+                'dark': '深色',
+                'nav-about': '关于',
+                'nav-services': '服务',
+                'nav-skills': '技能',
+                'nav-portfolio': '作品集',
+                'nav-contact': '联系',
+                'hero-name': '您的姓名',
+                'hero-title': '自由职业技术专家 | 数字解决方案提供商',
+                'hero-tagline': '"我将想法转化为高效的数字解决方案"',
+                'hero-skills': '编程 • 技术支持 • 数字问题解决',
+                'hero-cta-work': '查看我的作品',
+                'hero-cta-contact': '联系我',
+                'about-title': '关于我',
+                'about-text': '我是一名注重结果的自由职业技术专家，在编程、故障排除和提供广泛数字解决方案方面拥有专业技能。无论是构建网站、自动化任务还是提供技术支持，我专注于创造高效、实用和可靠的成果。',
+                'services-title': '服务',
+                'service-web-title': '网站开发',
+                'service-web-desc': '简洁、响应式的网站',
+                'service-automation-title': '自动化和脚本',
+                'service-automation-desc': '用智能脚本节省时间',
+                'service-support-title': '技术支持',
+                'service-support-desc': '故障排除和优化',
+                'service-data-title': '数据和管理任务',
+                'service-data-desc': '有条理、准确、高效',
+                'skills-title': '技能',
+                'skills-programming': '编程',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': '技术工具',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': '问题解决',
+                'skill-optimization': '系统优化',
+                'skill-workflow': '工作流程自动化',
+                'skills-soft': '软技能',
+                'skill-communication': '沟通',
+                'skill-time': '时间管理',
+                'skill-adaptability': '适应性',
+                'portfolio-title': '作品集',
+                'portfolio-web-title': '网站项目',
+                'portfolio-web-desc': '用现代技术构建的响应式网站',
+                'portfolio-automation-title': '脚本/自动化项目',
+                'portfolio-automation-desc': '节省时间并提高效率的自动化工作流程',
+                'portfolio-support-title': '技术支持案例',
+                'portfolio-support-desc': '系统优化和修复的前后对比示例',
+                'portfolio-demo': '实时演示',
+                'portfolio-code': '查看代码',
+                'portfolio-case-study': '案例研究',
+                'testimonials-title': '推荐',
+                'testimonial-1-text': '可靠、快速，理解我的需求。',
+                'testimonial-1-author': '– 客户姓名',
+                'testimonial-2-text': '通过自动化使我的工作流程快了3倍。',
+                'testimonial-2-author': '– 客户姓名',
+                'contact-title': '联系我',
+                'contact-email': '邮箱',
+                'contact-portfolio': '作品集链接',
+                'contact-freelance': '自由职业平台',
+                'contact-upwork': 'Upwork档案'
+            },
+            pt: {
+                'light': 'Claro',
+                'dark': 'Escuro',
+                'nav-about': 'Sobre',
+                'nav-services': 'Serviços',
+                'nav-skills': 'Habilidades',
+                'nav-portfolio': 'Portfólio',
+                'nav-contact': 'Contato',
+                'hero-name': 'Seu Nome',
+                'hero-title': 'Especialista Técnico Freelancer | Provedor de Soluções Digitais',
+                'hero-tagline': '"Eu transformo ideias em soluções digitais eficientes."',
+                'hero-skills': 'Programação • Suporte Técnico • Resolução de Problemas Digitais',
+                'hero-cta-work': 'Ver Meu Trabalho',
+                'hero-cta-contact': 'Entre em Contato',
+                'about-title': 'Sobre Mim',
+                'about-text': 'Sou um especialista técnico freelancer orientado a resultados com experiência em programação, solução de problemas e entrega de uma ampla gama de soluções digitais. Seja construindo um site, automatizando tarefas ou fornecendo suporte técnico, foco em criar resultados eficientes, práticos e confiáveis.',
+                'services-title': 'Serviços',
+                'service-web-title': 'Desenvolvimento Web',
+                'service-web-desc': 'Sites limpos e responsivos',
+                'service-automation-title': 'Automação e Scripts',
+                'service-automation-desc': 'Economize tempo com scripts inteligentes',
+                'service-support-title': 'Suporte Técnico',
+                'service-support-desc': 'Solução de problemas e otimização',
+                'service-data-title': 'Dados e Tarefas Administrativas',
+                'service-data-desc': 'Organizado, preciso, eficiente',
+                'skills-title': 'Habilidades',
+                'skills-programming': 'Programação',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': 'Ferramentas Técnicas',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': 'Resolução de Problemas',
+                'skill-optimization': 'Otimização de sistemas',
+                'skill-workflow': 'Automação de fluxo de trabalho',
+                'skills-soft': 'Habilidades Interpessoais',
+                'skill-communication': 'Comunicação',
+                'skill-time': 'Gestão do tempo',
+                'skill-adaptability': 'Adaptabilidade',
+                'portfolio-title': 'Portfólio',
+                'portfolio-web-title': 'Projetos de Sites',
+                'portfolio-web-desc': 'Sites responsivos construídos com tecnologias modernas',
+                'portfolio-automation-title': 'Projetos de Scripts/Automação',
+                'portfolio-automation-desc': 'Fluxos de trabalho automatizados que economizam tempo e aumentam a eficiência',
+                'portfolio-support-title': 'Casos de Suporte Técnico',
+                'portfolio-support-desc': 'Exemplos antes/depois de otimizações e correções de sistemas',
+                'portfolio-demo': 'Demo ao Vivo',
+                'portfolio-code': 'Ver Código',
+                'portfolio-case-study': 'Estudo de Caso',
+                'testimonials-title': 'Depoimentos',
+                'testimonial-1-text': 'Confiável, rápido e entende o que preciso.',
+                'testimonial-1-author': '– Nome do Cliente',
+                'testimonial-2-text': 'Fez meu fluxo de trabalho ficar 3x mais rápido com automação.',
+                'testimonial-2-author': '– Nome do Cliente',
+                'contact-title': 'Entre em Contato',
+                'contact-email': 'Email',
+                'contact-portfolio': 'Link do Portfólio',
+                'contact-freelance': 'Plataformas Freelancer',
+                'contact-upwork': 'Perfil Upwork'
+            },
+            ru: {
+                'light': 'Светлый',
+                'dark': 'Темный',
+                'nav-about': 'О себе',
+                'nav-services': 'Услуги',
+                'nav-skills': 'Навыки',
+                'nav-portfolio': 'Портфолио',
+                'nav-contact': 'Контакты',
+                'hero-name': 'Ваше Имя',
+                'hero-title': 'Фрилансер-специалист по технологиям | Поставщик цифровых решений',
+                'hero-tagline': '"Я превращаю идеи в эффективные цифровые решения."',
+                'hero-skills': 'Программирование • Техподдержка • Решение цифровых проблем',
+                'hero-cta-work': 'Посмотреть мои работы',
+                'hero-cta-contact': 'Связаться',
+                'about-title': 'О себе',
+                'about-text': 'Я фрилансер-специалист по технологиям, ориентированный на результат, с опытом в программировании, устранении неполадок и предоставлении широкого спектра цифровых решений. Будь то создание веб-сайта, автоматизация задач или предоставление технической поддержки, я сосредотачиваюсь на создании эффективных, практичных и надежных результатов.',
+                'services-title': 'Услуги',
+                'service-web-title': 'Веб-разработка',
+                'service-web-desc': 'Чистые, адаптивные веб-сайты',
+                'service-automation-title': 'Автоматизация и скрипты',
+                'service-automation-desc': 'Экономьте время с умными скриптами',
+                'service-support-title': 'Техническая поддержка',
+                'service-support-desc': 'Устранение неполадок и оптимизация',
+                'service-data-title': 'Данные и административные задачи',
+                'service-data-desc': 'Организованно, точно, эффективно',
+                'skills-title': 'Навыки',
+                'skills-programming': 'Программирование',
+                'skill-python': 'Python',
+                'skill-javascript': 'JavaScript',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': 'Технические инструменты',
+                'skill-git': 'Git',
+                'skill-google': 'Google Workspace',
+                'skill-microsoft': 'Microsoft Office',
+                'skills-problem-solving': 'Решение проблем',
+                'skill-optimization': 'Оптимизация систем',
+                'skill-workflow': 'Автоматизация рабочих процессов',
+                'skills-soft': 'Мягкие навыки',
+                'skill-communication': 'Коммуникация',
+                'skill-time': 'Управление временем',
+                'skill-adaptability': 'Адаптивность',
+                'portfolio-title': 'Портфолио',
+                'portfolio-web-title': 'Веб-проекты',
+                'portfolio-web-desc': 'Адаптивные веб-сайты, созданные с использованием современных технологий',
+                'portfolio-automation-title': 'Проекты скриптов/автоматизации',
+                'portfolio-automation-desc': 'Автоматизированные рабочие процессы, которые экономят время и повышают эффективность',
+                'portfolio-support-title': 'Случаи технической поддержки',
+                'portfolio-support-desc': 'Примеры до/после оптимизации и исправления систем',
+                'portfolio-demo': 'Живая демонстрация',
+                'portfolio-code': 'Посмотреть код',
+                'portfolio-case-study': 'Кейс-стади',
+                'testimonials-title': 'Отзывы',
+                'testimonial-1-text': 'Надежный, быстрый и понимает, что мне нужно.',
+                'testimonial-1-author': '– Имя клиента',
+                'testimonial-2-text': 'Сделал мой рабочий процесс в 3 раза быстрее с помощью автоматизации.',
+                'testimonial-2-author': '– Имя клиента',
+                'contact-title': 'Связаться со мной',
+                'contact-email': 'Email',
+                'contact-portfolio': 'Ссылка на портфолио',
+                'contact-freelance': 'Фриланс-платформы',
+                'contact-upwork': 'Профиль Upwork'
+            },
+            ar: {
+                'light': 'فاتح',
+                'dark': 'داكن',
+                'nav-about': 'حولي',
+                'nav-services': 'الخدمات',
+                'nav-skills': 'المهارات',
+                'nav-portfolio': 'الأعمال',
+                'nav-contact': 'تواصل',
+                'hero-name': 'اسمك',
+                'hero-title': 'متخصص تقني مستقل | مزود حلول رقمية',
+                'hero-tagline': '"أحول الأفكار إلى حلول رقمية فعالة"',
+                'hero-skills': 'البرمجة • الدعم التقني • حل المشاكل الرقمية',
+                'hero-cta-work': 'عرض أعمالي',
+                'hero-cta-contact': 'تواصل معي',
+                'about-title': 'حولي',
+                'about-text': 'أنا متخصص تقني مستقل موجه نحو النتائج مع خبرة في البرمجة وحل المشاكل وتقديم مجموعة واسعة من الحلول الرقمية. سواء كان بناء موقع ويب أو أتمتة المهام أو تقديم الدعم التقني، أركز على إنشاء نتائج فعالة وعملية وموثوقة.',
+                'services-title': 'الخدمات',
+                'service-web-title': 'تطوير المواقع',
+                'service-web-desc': 'مواقع نظيفة ومتجاوبة',
+                'service-automation-title': 'الأتمتة والسكريبتات',
+                'service-automation-desc': 'وفر الوقت مع السكريبتات الذكية',
+                'service-support-title': 'الدعم التقني',
+                'service-support-desc': 'استكشاف الأخطاء والتحسين',
+                'service-data-title': 'البيانات والمهام الإدارية',
+                'service-data-desc': 'منظم، دقيق، فعال',
+                'skills-title': 'المهارات',
+                'skills-programming': 'البرمجة',
+                'skill-python': 'بايثون',
+                'skill-javascript': 'جافاسكريبت',
+                'skill-html-css': 'HTML/CSS',
+                'skills-tech-tools': 'الأدوات التقنية',
+                'skill-git': 'جيت',
+                'skill-google': 'جوجل ووركسبيس',
+                'skill-microsoft': 'مايكروسوفت أوفيس',
+                'skills-problem-solving': 'حل المشاكل',
+                'skill-optimization': 'تحسين الأنظمة',
+                'skill-workflow': 'أتمتة سير العمل',
+                'skills-soft': 'المهارات الناعمة',
+                'skill-communication': 'التواصل',
+                'skill-time': 'إدارة الوقت',
+                'skill-adaptability': 'القدرة على التكيف',
+                'portfolio-title': 'الأعمال',
+                'portfolio-web-title': 'مشاريع المواقع',
+                'portfolio-web-desc': 'مواقع متجاوبة مبنية بالتقنيات الحديثة',
+                'portfolio-automation-title': 'مشاريع السكريبتات/الأتمتة',
+                'portfolio-automation-desc': 'سير عمل آلي يوفر الوقت ويزيد الكفاءة',
+                'portfolio-support-title': 'حالات الدعم التقني',
+                'portfolio-support-desc': 'أمثلة قبل/بعد لتحسينات وإصلاحات الأنظمة',
+                'portfolio-demo': 'عرض مباشر',
+                'portfolio-code': 'عرض الكود',
+                'portfolio-case-study': 'دراسة حالة',
+                'testimonials-title': 'الشهادات',
+                'testimonial-1-text': 'موثوق وسريع ويفهم ما أحتاجه.',
+                'testimonial-1-author': '– اسم العميل',
+                'testimonial-2-text': 'جعل سير عملي أسرع بـ3 مرات من خلال الأتمتة.',
+                'testimonial-2-author': '– اسم العميل',
+                'contact-title': 'تواصل معي',
+                'contact-email': 'البريد الإلكتروني',
+                'contact-portfolio': 'رابط الأعمال',
+                'contact-freelance': 'منصات العمل الحر',
+                'contact-upwork': 'ملف أب وورك'
+            }
+        };
+
+        let currentLanguage = 'en';
+        let currentTheme = 'light';
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', currentTheme);
+            themeToggle.classList.toggle('active');
+            localStorage.setItem('theme', currentTheme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            currentTheme = savedTheme;
+            body.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                themeToggle.classList.add('active');
+            }
+        }
+
+        // Language dropdown functionality
+        const languageDropdown = document.getElementById('languageDropdown');
+        const languageMenu = document.getElementById('languageMenu');
+        const currentLangElement = document.getElementById('currentLang');
+
+        languageDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageMenu.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            languageMenu.classList.remove('active');
+        });
+
+        // Language selection
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const selectedLang = e.currentTarget.getAttribute('data-lang');
+                const selectedText = e.currentTarget.textContent;
+                
+                currentLanguage = selectedLang;
+                currentLangElement.textContent = selectedText;
+                languageMenu.classList.remove('active');
+                
+                translatePage(selectedLang);
+                localStorage.setItem('language', selectedLang);
+            });
+        });
+
+        // Translation function
+        function translatePage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Handle right-to-left languages
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.body.style.textAlign = 'right';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.body.style.textAlign = 'left';
+            }
+        }
+
+        // Load saved language
+        const savedLanguage = localStorage.getItem('language');
+        if (savedLanguage) {
+            currentLanguage = savedLanguage;
+            translatePage(savedLanguage);
+            // Update dropdown display
+            const savedLangItem = document.querySelector(`[data-lang="${savedLanguage}"]`);
+            if (savedLangItem) {
+                currentLangElement.textContent = savedLangItem.textContent;
+            }
+        }
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                }
             });
         });
 
-        // Navbar scroll effect
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Header scroll effect
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('header');
+
         window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
             if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
             } else {
-                navbar.classList.remove('scrolled');
+                header.style.background = 'var(--card-bg)';
+                header.style.boxShadow = 'none';
             }
+            
+            lastScrollY = window.scrollY;
         });
 
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.querySelector('.particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.width = (Math.random() * 5 + 2) + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Animate progress bars on scroll
-        function animateProgressBars() {
-            const progressBars = document.querySelectorAll('.progress-fill');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const fill = entry.target;
-                        const width = fill.dataset.width;
-                        fill.style.width = width + '%';
-                    }
-                });
-            });
-
-            progressBars.forEach(bar => {
-                observer.observe(bar);
-            });
-        }
-
-        // Project interaction functions
-        function showDemo() {
-            alert('🚀 This would open the live demo! Replace with your actual project URLs.');
-        }
-
-        function showCode() {
-            alert('💻 This would open the GitHub repository! Replace with your actual GitHub links.');
-        }
-
-        // Contact form submission
-        function sendMessage() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            if (name && email && message) {
-                alert(`Thanks ${name}! Your message has been sent. I'll get back to you soon!`);
-                document.querySelector('.contact-form').reset();
-            } else {
-                alert('Please fill in all fields.');
-            }
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            animateProgressBars();
-        });
-
-        // Add some interactive hover effects
-        document.querySelectorAll('.skill-card').forEach(card => {
+        // Add hover effects to cards
+        document.querySelectorAll('.service-card, .skill-category, .portfolio-card, .testimonial-card, .contact-item').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px) scale(1.02)';
+                card.style.transform = 'translateY(-5px) scale(1.02)';
             });
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0) scale(1)';
             });
         });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        console.log('🚀 Professional Portfolio loaded successfully!');
+        console.log('💡 Features: Dark/Light mode, Multi-language support, Mobile responsive');
+        console.log('🌍 Languages: EN, ES, FR, DE, JA, ZH, PT, RU, AR');
     </script>
 </body>
 </html>
