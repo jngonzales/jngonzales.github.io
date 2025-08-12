@@ -394,6 +394,19 @@
             color: var(--text-secondary);
             font-weight: 300;
             animation: slideInLeft 1s ease-out 0.2s both;
+            min-height: 2.2em; /* Reserve space for typewriter */
+        }
+        
+        .typewriter-cursor {
+            display: inline-block;
+            background-color: var(--accent-primary);
+            width: 3px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { background-color: transparent; }
+            50% { background-color: var(--accent-primary); }
         }
 
         .hero-tagline {
@@ -502,67 +515,6 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-
-        /* Enhanced Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow);
-            border-color: var(--accent-primary);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .service-card h3 {
-            color: var(--accent-primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .service-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
         
         /* Skills Section UI */
         .skills-grid {
@@ -604,6 +556,34 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
             min-height: 45px;
+        }
+
+        .skill-tags {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .skills-disclaimer {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .progress-bar {
@@ -696,6 +676,109 @@
         .category-content.active {
             display: block;
         }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card.placeholder {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .project-card.placeholder .project-media {
+            font-size: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px var(--shadow);
+            border-color: var(--accent-primary);
+        }
+        
+        .project-media {
+            height: 220px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .project-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-links a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--accent-primary);
+            font-size: 0.9rem;
+        }
+
+        .project-links a:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
 
         .empty-state {
             text-align: center;
@@ -745,19 +828,44 @@
             padding: 2rem;
             border-radius: 20px;
             border: 1px solid var(--border-color);
-            position: relative;
             font-style: italic;
         }
-
+        
         .testimonial-text {
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
 
-        .testimonial-author {
-            color: var(--accent-primary);
-            font-weight: 600;
+        .testimonial-author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
             font-style: normal;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            flex-shrink: 0;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .testimonial-author-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
         
         /* Contact Section */
@@ -792,15 +900,346 @@
         .contact-icon {
             font-size: 3rem;
             margin-bottom: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            width: 48px; /* Standard size */
+            height: 48px; /* Standard size */
+            fill: var(--accent-primary); /* Color control */
         }
 
         .contact-item h3 {
             color: var(--accent-primary);
             margin-bottom: 0;
             font-size: 1.3rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            color: var(--accent-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            z-index: 9999;
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #back-to-top:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+        }
+
+        /* === AI CHATBOT STYLES === */
+        .ai-chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+            font-family: inherit;
+        }
+
+        .chatbot-minimized {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--tech-glow), 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid var(--border-color);
+        }
+
+        .chatbot-minimized:hover {
+            transform: scale(1.1);
+            box-shadow: var(--tech-glow), 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .chatbot-minimized .bot-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .chatbot-expanded {
+            width: 380px;
+            height: 500px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--tech-glow), 0 10px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.5);
+            opacity: 0;
+            transform-origin: bottom right;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chatbot-expanded.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .chatbot-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            animation: messageSlide 0.3s ease-out;
+        }
+
+        .message.user {
+            background: var(--accent-primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.assistant {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.assistant a {
+            color: var(--accent-primary);
+            text-decoration: underline;
+        }
+        
+        .message.assistant a:hover {
+            text-decoration: none;
+        }
+
+        .message.loading {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            animation: typingBounce 1.4s ease-in-out infinite both;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            } 40% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-input-container {
+            padding: 1rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 0.8rem 1rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            resize: none;
+            max-height: 100px;
+            min-height: 40px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chatbot-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .chatbot-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .chatbot-send {
+            background: var(--gradient);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .chatbot-send:hover {
+            transform: scale(1.05);
+            box-shadow: var(--tech-glow);
+        }
+
+        .chatbot-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .suggested-prompts {
+            padding: 0 1rem 1rem;
+            background: var(--bg-primary);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .prompt-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .prompt-chip:hover {
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Scrollbar Styling */
+        .chatbot-messages::-webkit-scrollbar,
+        .chatbot-input::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track,
+        .chatbot-input::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb,
+        .chatbot-input::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb:hover,
+        .chatbot-input::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
         }
 
         /* Animations */
@@ -848,6 +1287,18 @@
             .cta-buttons { align-items: center; }
             .skills-grid, .services-grid, .portfolio-grid, .contact-grid { grid-template-columns: 1fr; }
             .section-title { font-size: 2.2rem; }
+
+            .chatbot-expanded {
+                width: calc(100vw - 40px);
+                height: calc(100vh - 100px);
+                max-width: 380px;
+                max-height: 600px;
+            }
+
+            .ai-chatbot {
+                bottom: 15px;
+                right: 15px;
+            }
         }
 
         /* Loading screen */
@@ -909,7 +1360,6 @@
                 
                 <nav class="nav-menu" id="navMenu">
                     <a href="#about" data-i18n="nav-about">About</a>
-                    <a href="#services" data-i18n="nav-services">Services</a>
                     <a href="#skills" data-i18n="nav-skills">Skills</a>
                     <a href="#portfolio" data-i18n="nav-portfolio">Portfolio</a>
                     <a href="#contact" data-i18n="nav-contact">Contact</a>
@@ -918,12 +1368,12 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 data-i18n="hero-name">JN Gonzales</h1>
-                    <p class="hero-subtitle" data-i18n="hero-title">Freelance Tech Specialist | Digital Solutions Provider</p>
+                    <p class="hero-subtitle"><span id="typewriter-text"></span><span class="typewriter-cursor">&nbsp;</span></p>
                     <p class="hero-tagline" data-i18n="hero-tagline">"I turn ideas into efficient digital solutions."</p>
                     <p class="hero-skills" data-i18n="hero-skills">Coding • Tech Support • Digital Problem-Solving</p>
                 </div>
@@ -952,44 +1402,6 @@
             </div>
         </div>
     </section>
-
-    <section id="services" class="section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="services-title">Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3 data-i18n="service-web-title">Web Development</h3>
-                    <p data-i18n="service-web-desc">Clean, responsive websites built with modern technologies</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
-                    <h3 data-i18n="service-automation-title">Automation & Scripting</h3>
-                    <p data-i18n="service-automation-desc">Save time with smart automation scripts and workflows</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🖥️</div>
-                    <h3 data-i18n="service-support-title">Technical Support</h3>
-                    <p data-i18n="service-support-desc">Professional troubleshooting and system optimization</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <h3 data-i18n="service-data-title">Data & Admin Tasks</h3>
-                    <p data-i18n="service-data-desc">Organized, accurate, and efficient data management</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔍</div>
-                    <h3 data-i18n="service-research-title">Research</h3>
-                    <p data-i18n="service-research-desc">Comprehensive research and analysis for informed decisions</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎮</div>
-                    <h3 data-i18n="service-game-title">Game Hacking</h3>
-                    <p data-i18n="service-game-desc">Ethical game modification and reverse engineering</p>
-                </div>
-            </div>
-        </div>
-    </section>
     
     <section id="skills" class="section">
         <div class="container">
@@ -1002,6 +1414,12 @@
                     <div class="progress-bar">
                         <div class="progress-fill" data-width="90"></div>
                     </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                    </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">⚙️</div>
@@ -1009,6 +1427,11 @@
                     <p data-i18n="skill-automation-desc">Creating smart scripts to automate repetitive tasks.</p>
                     <div class="progress-bar">
                         <div class="progress-fill" data-width="80"></div>
+                    </div>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">APIs</span>
                     </div>
                 </div>
                 <div class="skill-card">
@@ -1018,6 +1441,11 @@
                     <div class="progress-bar">
                         <div class="progress-fill" data-width="75"></div>
                     </div>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Windows</span>
+                        <span class="skill-tag">macOS</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">📊</div>
@@ -1025,6 +1453,11 @@
                     <p data-i18n="skill-data-desc">Efficient, organized, and accurate data handling.</p>
                     <div class="progress-bar">
                         <div class="progress-fill" data-width="100"></div>
+                    </div>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Data Entry</span>
                     </div>
                 </div>
                 <div class="skill-card">
@@ -1034,6 +1467,10 @@
                     <div class="progress-bar">
                         <div class="progress-fill" data-width="95"></div>
                     </div>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Market Analysis</span>
+                        <span class="skill-tag">Data Mining</span>
+                    </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">🎮</div>
@@ -1042,8 +1479,15 @@
                     <div class="progress-bar">
                         <div class="progress-fill" data-width="75"></div>
                     </div>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Cheat Engine</span>
+                        <span class="skill-tag">Reverse Engineering</span>
+                    </div>
                 </div>
             </div>
+             <p class="skills-disclaimer" data-i18n="skill-disclaimer">
+                These are just some of my skills— I’m always learning and can quickly pick up new technologies to meet your project’s specific requirements.
+            </p>
         </div>
     </section>
 
@@ -1052,10 +1496,10 @@
             <h2 class="section-title" data-i18n="portfolio-title">Portfolio</h2>
             
             <div class="portfolio-categories">
-                <button class="category-btn active" data-category="research">
+                <button class="category-btn" data-category="research">
                     <span data-i18n="portfolio-cat-research">🔍 Research</span>
                 </button>
-                <button class="category-btn" data-category="programming">
+                <button class="category-btn active" data-category="programming">
                     <span data-i18n="portfolio-cat-programming">💻 Code & Programming</span>
                 </button>
                 <button class="category-btn" data-category="administrative">
@@ -1067,51 +1511,85 @@
             </div>
     
             <div class="portfolio-content">
-                <div class="category-content active" id="research">
-                    <div class="empty-state">
-                        <div class="empty-icon">🔍</div>
-                        <h3 class="empty-title" data-i18n="portfolio-research-title">Research Projects</h3>
-                        <p class="empty-description" data-i18n="portfolio-research-desc">
-                            This section will showcase my research projects including market analysis, 
-                            competitive research, data analysis, and comprehensive reporting work. 
-                            Projects coming soon!
-                        </p>
+                <div class="category-content" id="research">
+                    <div class="projects-grid">
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
                     </div>
                 </div>
     
-                <div class="category-content" id="programming">
-                    <div class="empty-state">
-                        <div class="empty-icon">💻</div>
-                        <h3 class="empty-title" data-i18n="portfolio-programming-title">Code & Programming Projects</h3>
-                        <p class="empty-description" data-i18n="portfolio-programming-desc">
-                            Here you'll find my coding projects including web applications, automation scripts, 
-                            APIs, and software solutions. Examples of clean, efficient, and scalable code 
-                            will be featured here soon!
-                        </p>
+                <div class="category-content active" id="programming">
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-media">
+                                <video src="https://jngonzales.github.io/qr/Showcase%20QR.mp4" muted loop controls></video>
+                            </div>
+                            <div class="project-content">
+                                <h3 data-i18n="project-qr-title">QR Nexus: Generator & Scanner</h3>
+                                <p data-i18n="project-qr-desc">A comprehensive web tool for creating and scanning various QR code types, featuring a history log and clean, futuristic UI.</p>
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                    <span class="project-tag">QR Codes</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://jngonzales.github.io/qr/" target="_blank" data-i18n="portfolio-demo">Live Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
                     </div>
                 </div>
     
                 <div class="category-content" id="administrative">
-                    <div class="empty-state">
-                        <div class="empty-icon">📊</div>
-                        <h3 class="empty-title" data-i18n="portfolio-admin-title">Administrative Projects</h3>
-                        <p class="empty-description" data-i18n="portfolio-admin-desc">
-                            This category will display my administrative work including data entry, 
-                            document management, process optimization, and organizational systems. 
-                            Professional examples coming soon!
-                        </p>
+                     <div class="projects-grid">
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
                     </div>
                 </div>
     
                 <div class="category-content" id="general">
-                    <div class="empty-state">
-                        <div class="empty-icon">🛠️</div>
-                        <h3 class="empty-title" data-i18n="portfolio-general-title">General Skills Projects</h3>
-                        <p class="empty-description" data-i18n="portfolio-general-desc">
-                            A collection of diverse projects showcasing various technical skills, 
-                            problem-solving capabilities, and creative solutions across different domains. 
-                            Mixed portfolio items will be added here!
-                        </p>
+                     <div class="projects-grid">
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
+                        <div class="project-card placeholder">
+                            <div class="project-media">📁</div>
+                            <div class="project-content"><h3>Coming Soon</h3></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1127,12 +1605,24 @@
             <h2 class="section-title" data-i18n="testimonials-title">Testimonials</h2>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
+                    <div class="testimonial-author-info">
+                        <div class="testimonial-avatar">SC</div>
+                        <div class="testimonial-author-details">
+                            <p class="testimonial-author">Sarah Chen</p>
+                            <p class="testimonial-author-title" data-i18n="testimonial-1-title">Business Owner</p>
+                        </div>
+                    </div>
                     <p class="testimonial-text" data-i18n="testimonial-1-text">"Reliable, fast, and understands what I need. JN delivered exactly what was promised."</p>
-                    <p class="testimonial-author" data-i18n="testimonial-1-author">– Sarah Chen, Business Owner</p>
                 </div>
                 <div class="testimonial-card">
+                    <div class="testimonial-author-info">
+                        <div class="testimonial-avatar">MR</div>
+                        <div class="testimonial-author-details">
+                            <p class="testimonial-author">Mark Rodriguez</p>
+                            <p class="testimonial-author-title" data-i18n="testimonial-2-title">Startup Founder</p>
+                        </div>
+                    </div>
                     <p class="testimonial-text" data-i18n="testimonial-2-text">"Made my workflow 3x faster with automation. Exceptional technical skills!"</p>
-                    <p class="testimonial-author" data-i18n="testimonial-2-author">– Mark Rodriguez, Startup Founder</p>
                 </div>
             </div>
         </div>
@@ -1144,25 +1634,33 @@
             <div class="contact-grid">
                 <a href="mailto:jobbynoelgonzales@gmail.com" class="contact-item-link">
                     <div class="contact-item">
-                        <div class="contact-icon">📧</div>
+                         <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+                        </div>
                         <h3 data-i18n="contact-email">Email</h3>
                     </div>
                 </a>
                 <a href="https://www.linkedin.com/in/jn-gonzales/" target="_blank" class="contact-item-link">
                     <div class="contact-item">
-                        <div class="contact-icon">💼</div>
+                        <div class="contact-icon">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.25 6.5 1.75 1.75 0 0 1 6.5 8.25ZM19 19h-3v-4.75c0-1.4-1.2-2.5-2.5-2.5S11 12.85 11 14.25V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.6-1.4c2.5 0 4.5 2.2 4.5 5.1z"/></svg>
+                        </div>
                         <h3 data-i18n="contact-linkedin">LinkedIn</h3>
                     </div>
                 </a>
                 <a href="https://facebook.com/Rozen0" target="_blank" class="contact-item-link">
                     <div class="contact-item">
-                        <div class="contact-icon">📘</div>
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4z"/></svg>
+                        </div>
                         <h3 data-i18n="contact-facebook">Facebook</h3>
                     </div>
                 </a>
                 <a href="https://www.instagram.com/dfntlyntrozen/" target="_blank" class="contact-item-link">
                     <div class="contact-item">
-                        <div class="contact-icon">📷</div>
+                        <div class="contact-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.217.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.048 1.066.06 1.405.06 4.122s-.012 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.048-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-3c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5z"/></svg>
+                        </div>
                         <h3 data-i18n="contact-instagram">Instagram</h3>
                     </div>
                 </a>
@@ -1170,17 +1668,50 @@
         </div>
     </section>
 
+    <!-- === FOOTER === -->
+    <footer>
+        <div class="container">
+            <p id="footer-text">&copy; 2025 JN Gonzales. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <a href="#hero" id="back-to-top" title="Back to Top">↑</a>
+
+    <!-- === AI CHATBOT HTML === -->
+    <div class="ai-chatbot">
+        <div class="chatbot-minimized" id="chatbot-minimized">
+            <div class="bot-icon">🤖</div>
+        </div>
+        <div class="chatbot-expanded hidden" id="chatbot-expanded">
+            <div class="chatbot-header">
+                <h3 data-i18n="chatbot-title">AI Assistant</h3>
+                <button class="chatbot-close" id="chatbot-close">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <!-- Messages will be added here by JavaScript -->
+            </div>
+             <div class="suggested-prompts" id="suggested-prompts">
+                <!-- Prompt chips will be added here -->
+            </div>
+            <div class="chatbot-input-container">
+                <textarea class="chatbot-input" id="chatbot-input" placeholder="Ask me anything..." rows="1"></textarea>
+                <button class="chatbot-send" id="chatbot-send">➤</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const translations = {
-            en: { 'light': 'Light', 'dark': 'Dark', 'nav-about': 'About', 'nav-services': 'Services', 'nav-skills': 'Skills', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Contact', 'hero-name': 'JN Gonzales', 'hero-title': 'Freelance Tech Specialist | Digital Solutions Provider', 'hero-tagline': '"I turn ideas into efficient digital solutions."', 'hero-skills': 'Coding • Tech Support • Digital Problem-Solving', 'hero-cta-work': 'View My Work', 'hero-cta-contact': 'Get In Touch', 'about-title': 'About Me', 'about-text': 'I\'m a results-driven freelance tech specialist with expertise in coding, troubleshooting, and delivering a wide range of digital solutions. Whether it\'s building a website, automating tasks, or providing technical support, I focus on creating efficient, practical, and reliable outcomes.', 'services-title': 'Services', 'service-web-title': 'Web Development', 'service-web-desc': 'Clean, responsive websites built with modern technologies', 'service-automation-title': 'Automation & Scripting', 'service-automation-desc': 'Save time with smart automation scripts and workflows', 'service-support-title': 'Technical Support', 'service-support-desc': 'Professional troubleshooting and system optimization', 'service-data-title': 'Data & Admin Tasks', 'service-data-desc': 'Organized, accurate, and efficient data management', 'service-research-title': 'Research', 'service-research-desc': 'Comprehensive research and analysis for informed decisions', 'service-game-title': 'Game Hacking', 'service-game-desc': 'Ethical game modification and reverse engineering', 'skills-title': 'Skills', 'skill-web-dev-title': 'Web Development', 'skill-web-dev-desc': 'Building responsive, modern websites and applications.', 'skill-automation-title': 'Automation & Scripting', 'skill-automation-desc': 'Creating smart scripts to automate repetitive tasks.', 'skill-support-title': 'Technical Support', 'skill-support-desc': 'System optimization and expert troubleshooting.', 'skill-data-title': 'Data & Admin Tasks', 'skill-data-desc': 'Efficient, organized, and accurate data handling.', 'skill-research-title': 'Research', 'skill-research-desc': 'In-depth analysis and insightful reporting.', 'skill-gamehack-title': 'Game Hacking', 'skill-gamehack-desc': 'Game security analysis and reverse engineering.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Research', 'portfolio-cat-programming': '💻 Code & Programming', 'portfolio-cat-admin': '📊 Administrative', 'portfolio-cat-general': '🛠️ General Skills', 'portfolio-research-title': 'Research Projects', 'portfolio-research-desc': 'This section will showcase my research projects including market analysis, competitive research, data analysis, and comprehensive reporting work. Projects coming soon!', 'portfolio-programming-title': 'Code & Programming Projects', 'portfolio-programming-desc': 'Here you\'ll find my coding projects including web applications, automation scripts, APIs, and software solutions. Examples of clean, efficient, and scalable code will be featured here soon!', 'portfolio-admin-title': 'Administrative Projects', 'portfolio-admin-desc': 'This category will display my administrative work including data entry, document management, process optimization, and organizational systems. Professional examples coming soon!', 'portfolio-general-title': 'General Skills Projects', 'portfolio-general-desc': 'A collection of diverse projects showcasing various technical skills, problem-solving capabilities, and creative solutions across different domains. Mixed portfolio items will be added here!', 'portfolio-disclaimer': 'Projects showcased here are presented with the full consent of my clients. If circumstances change, clients may reach out for immediate removal or adjustment.', 'testimonials-title': 'Testimonials', 'testimonial-1-text': '"Reliable, fast, and understands what I need. JN delivered exactly what was promised."', 'testimonial-1-author': '– Sarah Chen, Business Owner', 'testimonial-2-text': '"Made my workflow 3x faster with automation. Exceptional technical skills!"', 'testimonial-2-author': '– Mark Rodriguez, Startup Founder', 'contact-title': 'Contact Me', 'contact-email': 'Email', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn' },
-            es: { 'light': 'Claro', 'dark': 'Oscuro', 'nav-about': 'Sobre Mí', 'nav-services': 'Servicios', 'nav-skills': 'Habilidades', 'nav-portfolio': 'Portafolio', 'nav-contact': 'Contacto', 'hero-name': 'JN Gonzales', 'hero-title': 'Especialista Técnico Freelance | Proveedor de Soluciones Digitales', 'hero-tagline': '"Convierto ideas en soluciones digitales eficientes."', 'hero-skills': 'Codificación • Soporte Técnico • Resolución de Problemas Digitales', 'hero-cta-work': 'Ver Mi Trabajo', 'hero-cta-contact': 'Contáctame', 'about-title': 'Sobre Mí', 'about-text': 'Soy un especialista técnico freelance orientado a resultados con experiencia en codificación, resolución de problemas y entrega de una amplia gama de soluciones digitales. Ya sea construyendo un sitio web, automatizando tareas o brindando soporte técnico, me enfoco en crear resultados eficientes, prácticos y confiables.', 'services-title': 'Servicios', 'service-web-title': 'Desarrollo Web', 'service-web-desc': 'Sitios web limpios y responsivos construidos con tecnologías modernas', 'service-automation-title': 'Automatización y Scripts', 'service-automation-desc': 'Ahorre tiempo con scripts y flujos de trabajo de automatización inteligentes', 'service-support-title': 'Soporte Técnico', 'service-support-desc': 'Resolución de problemas profesional y optimización del sistema', 'service-data-title': 'Datos y Tareas Administrativas', 'service-data-desc': 'Gestión de datos organizada, precisa y eficiente', 'service-research-title': 'Investigación', 'service-research-desc': 'Investigación y análisis exhaustivos para decisiones informadas', 'service-game-title': 'Hacking de Juegos', 'service-game-desc': 'Modificación ética de juegos e ingeniería inversa', 'skills-title': 'Habilidades', 'skill-web-dev-title': 'Desarrollo Web', 'skill-web-dev-desc': 'Construcción de sitios web y aplicaciones modernas y responsivas.', 'skill-automation-title': 'Automatización y Scripts', 'skill-automation-desc': 'Creación de scripts inteligentes para automatizar tareas repetitivas.', 'skill-support-title': 'Soporte Técnico', 'skill-support-desc': 'Optimización de sistemas y resolución de problemas experta.', 'skill-data-title': 'Datos y Tareas Administrativas', 'skill-data-desc': 'Manejo de datos eficiente, organizado y preciso.', 'skill-research-title': 'Investigación', 'skill-research-desc': 'Análisis en profundidad e informes perspicaces.', 'skill-gamehack-title': 'Hacking de Juegos', 'skill-gamehack-desc': 'Análisis de seguridad de juegos e ingeniería inversa.', 'portfolio-title': 'Portafolio', 'portfolio-cat-research': '🔍 Investigación', 'portfolio-cat-programming': '💻 Código y Programación', 'portfolio-cat-admin': '📊 Administrativo', 'portfolio-cat-general': '🛠️ Habilidades Generales', 'portfolio-research-title': 'Proyectos de Investigación', 'portfolio-research-desc': 'Esta sección mostrará mis proyectos de investigación incluyendo análisis de mercado, investigación competitiva, análisis de datos y trabajos de informes exhaustivos. ¡Proyectos próximamente!', 'portfolio-programming-title': 'Proyectos de Código y Programación', 'portfolio-programming-desc': 'Aquí encontrarás mis proyectos de codificación incluyendo aplicaciones web, scripts de automatización, APIs y soluciones de software. ¡Ejemplos de código limpio, eficiente y escalable se presentarán aquí pronto!', 'portfolio-admin-title': 'Proyectos Administrativos', 'portfolio-admin-desc': 'Esta categoría mostrará mi trabajo administrativo incluyendo entrada de datos, gestión de documentos, optimización de procesos y sistemas organizacionales. ¡Ejemplos profesionales próximamente!', 'portfolio-general-title': 'Proyectos de Habilidades Generales', 'portfolio-general-desc': 'Una colección de proyectos diversos que muestran varias habilidades técnicas, capacidades de resolución de problemas y soluciones creativas en diferentes dominios. ¡Elementos de portafolio mixto se agregarán aquí!', 'portfolio-disclaimer': 'Los proyectos mostrados aquí se presentan con el pleno consentimiento de mis clientes. Si las circunstancias cambian, los clientes pueden contactarme para su eliminación o ajuste inmediato.', 'testimonials-title': 'Testimonios', 'testimonial-1-text': '"Confiable, rápido y entiende lo que necesito. JN entregó exactamente lo que prometió."', 'testimonial-1-author': '– Sarah Chen, Dueña de Negocio', 'testimonial-2-text': '"Hizo mi flujo de trabajo 3 veces más rápido con la automatización. ¡Habilidades técnicas excepcionales!"', 'testimonial-2-author': '– Mark Rodriguez, Fundador de Startup', 'contact-title': 'Contáctame', 'contact-email': 'Correo Electrónico', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn' },
-            fr: { 'light': 'Clair', 'dark': 'Sombre', 'nav-about': 'À propos', 'nav-services': 'Services', 'nav-skills': 'Compétences', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Contact', 'hero-name': 'JN Gonzales', 'hero-title': 'Spécialiste Technique Freelance | Fournisseur de Solutions Numériques', 'hero-tagline': '"Je transforme les idées en solutions numériques efficaces."', 'hero-skills': 'Codage • Support Technique • Résolution de Problèmes Numériques', 'hero-cta-work': 'Voir Mon Travail', 'hero-cta-contact': 'Me Contacter', 'about-title': 'À propos de Moi', 'about-text': 'Je suis un spécialiste technique freelance axé sur les résultats avec une expertise en codage, dépannage et livraison d\'une large gamme de solutions numériques. Qu\'il s\'agisse de construire un site web, d\'automatiser des tâches ou de fournir un support technique, je me concentre sur la création de résultats efficaces, pratiques et fiables.', 'services-title': 'Services', 'service-web-title': 'Développement Web', 'service-web-desc': 'Sites web propres et réactifs construits avec des technologies modernes', 'service-automation-title': 'Automatisation & Scripting', 'service-automation-desc': 'Gagnez du temps avec des scripts et des workflows d\'automatisation intelligents', 'service-support-title': 'Support Technique', 'service-support-desc': 'Dépannage professionnel et optimisation du système', 'service-data-title': 'Données & Tâches Administratives', 'service-data-desc': 'Gestion de données organisée, précise et efficace', 'service-research-title': 'Recherche', 'service-research-desc': 'Recherche et analyse complètes pour des décisions éclairées', 'service-game-title': 'Piratage de Jeux', 'service-game-desc': 'Modification éthique de jeux et ingénierie inverse', 'skills-title': 'Compétences', 'skill-web-dev-title': 'Développement Web', 'skill-web-dev-desc': 'Création de sites web et d\'applications modernes et réactifs.', 'skill-automation-title': 'Automatisation et Scripting', 'skill-automation-desc': 'Création de scripts intelligents pour automatiser les tâches répétitives.', 'skill-support-title': 'Support Technique', 'skill-support-desc': 'Optimisation du système et dépannage expert.', 'skill-data-title': 'Données et Tâches Administratives', 'skill-data-desc': 'Gestion des données efficace, organisée et précise.', 'skill-research-title': 'Recherche', 'skill-research-desc': 'Analyse approfondie et rapports pertinents.', 'skill-gamehack-title': 'Piratage de Jeux', 'skill-gamehack-desc': 'Analyse de la sécurité des jeux et ingénierie inverse.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Recherche', 'portfolio-cat-programming': '💻 Code & Programmation', 'portfolio-cat-admin': '📊 Administratif', 'portfolio-cat-general': '🛠️ Compétences Générales', 'portfolio-research-title': 'Projets de Recherche', 'portfolio-research-desc': 'Cette section présentera mes projets de recherche, y compris l\'analyse de marché, la recherche concurrentielle, l\'analyse de données et les travaux de rapport complets. Projets à venir !', 'portfolio-programming-title': 'Projets de Code & Programmation', 'portfolio-programming-desc': 'Vous trouverez ici mes projets de codage, y compris des applications Web, des scripts d\'automatisation, des API et des solutions logicielles. Des exemples de code propre, efficace et évolutif seront bientôt présentés ici !', 'portfolio-admin-title': 'Projets Administratifs', 'portfolio-admin-desc': 'Cette catégorie affichera mon travail administratif, y compris la saisie de données, la gestion de documents, l\'optimisation des processus et les systèmes organisationnels. Exemples professionnels à venir !', 'portfolio-general-title': 'Projets de Compétences Générales', 'portfolio-general-desc': 'Une collection de projets diversifiés présentant diverses compétences techniques, des capacités de résolution de problèmes et des solutions créatives dans différents domaines. Des éléments de portfolio mixtes seront ajoutés ici !', 'portfolio-disclaimer': 'Les projets présentés ici le sont avec le consentement total de mes clients. Si les circonstances changent, les clients peuvent me contacter pour un retrait ou un ajustement immédiat.', 'testimonials-title': 'Témoignages', 'testimonial-1-text': '"Fiable, rapide, et comprend ce dont j\'ai besoin. JN a livré exactement ce qui était promis."', 'testimonial-1-author': '– Sarah Chen, Propriétaire d\'entreprise', 'testimonial-2-text': '"A rendu mon flux de travail 3 fois plus rapide avec l\'automatisation. Compétences techniques exceptionnelles!"', 'testimonial-2-author': '– Mark Rodriguez, Fondateur de Startup', 'contact-title': 'Me Contacter', 'contact-email': 'Email', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn' },
-            de: { 'light': 'Hell', 'dark': 'Dunkel', 'nav-about': 'Über Mich', 'nav-services': 'Dienste', 'nav-skills': 'Fähigkeiten', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Kontakt', 'hero-name': 'JN Gonzales', 'hero-title': 'Freiberuflicher Tech-Spezialist | Anbieter digitaler Lösungen', 'hero-tagline': '"Ich verwandle Ideen in effiziente digitale Lösungen."', 'hero-skills': 'Codierung • Technischer Support • Digitale Problemlösung', 'hero-cta-work': 'Meine Arbeit ansehen', 'hero-cta-contact': 'Kontakt aufnehmen', 'about-title': 'Über Mich', 'about-text': 'Ich bin ein ergebnisorientierter freiberuflicher Tech-Spezialist mit Expertise in Codierung, Fehlerbehebung und der Bereitstellung einer breiten Palette digitaler Lösungen. Ob es um die Erstellung einer Website, die Automatisierung von Aufgaben oder die Bereitstellung von technischem Support geht, ich konzentriere mich auf die Schaffung effizienter, praktischer und zuverlässiger Ergebnisse.', 'services-title': 'Dienstleistungen', 'service-web-title': 'Webentwicklung', 'service-web-desc': 'Saubere, responsive Websites, die mit modernen Technologien erstellt wurden', 'service-automation-title': 'Automatisierung & Scripting', 'service-automation-desc': 'Sparen Sie Zeit mit intelligenten Automatisierungsskripten und Workflows', 'service-support-title': 'Technischer Support', 'service-support-desc': 'Professionelle Fehlerbehebung und Systemoptimierung', 'service-data-title': 'Daten & Verwaltungsaufgaben', 'service-data-desc': 'Organisierte, genaue und effiziente Datenverwaltung', 'service-research-title': 'Forschung', 'service-research-desc': 'Umfassende Forschung und Analyse für fundierte Entscheidungen', 'service-game-title': 'Game Hacking', 'service-game-desc': 'Ethische Spielmodifikation und Reverse Engineering', 'skills-title': 'Fähigkeiten', 'skill-web-dev-title': 'Webentwicklung', 'skill-web-dev-desc': 'Erstellung von responsiven, modernen Websites und Anwendungen.', 'skill-automation-title': 'Automatisierung & Scripting', 'skill-automation-desc': 'Erstellung intelligenter Skripte zur Automatisierung wiederkehrender Aufgaben.', 'skill-support-title': 'Technischer Support', 'skill-support-desc': 'Systemoptimierung und fachkundige Fehlerbehebung.', 'skill-data-title': 'Daten & Verwaltungsaufgaben', 'skill-data-desc': 'Effiziente, organisierte und genaue Datenverarbeitung.', 'skill-research-title': 'Forschung', 'skill-research-desc': 'Tiefgehende Analyse und aufschlussreiche Berichterstattung.', 'skill-gamehack-title': 'Game Hacking', 'skill-gamehack-desc': 'Spiel-Sicherheitsanalyse und Reverse Engineering.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Forschung', 'portfolio-cat-programming': '💻 Code & Programmierung', 'portfolio-cat-admin': '📊 Administrativ', 'portfolio-cat-general': '🛠️ Allgemeine Fähigkeiten', 'portfolio-research-title': 'Forschungsprojekte', 'portfolio-research-desc': 'Dieser Abschnitt wird meine Forschungsprojekte vorstellen, einschließlich Marktanalyse, Wettbewerbsforschung, Datenanalyse und umfassende Berichterstattung. Projekte folgen in Kürze!', 'portfolio-programming-title': 'Code- und Programmierprojekte', 'portfolio-programming-desc': 'Hier finden Sie meine Codierungsprojekte, einschließlich Webanwendungen, Automatisierungsskripte, APIs und Softwarelösungen. Beispiele für sauberen, effizienten und skalierbaren Code werden hier in Kürze vorgestellt!', 'portfolio-admin-title': 'Administrative Projekte', 'portfolio-admin-desc': 'Diese Kategorie zeigt meine administrativen Arbeiten, einschließlich Dateneingabe, Dokumentenmanagement, Prozessoptimierung und Organisationssysteme. Professionelle Beispiele folgen in Kürze!', 'portfolio-general-title': 'Projekte für allgemeine Fähigkeiten', 'portfolio-general-desc': 'Eine Sammlung verschiedener Projekte, die verschiedene technische Fähigkeiten, Problemlösungsfähigkeiten und kreative Lösungen in verschiedenen Bereichen zeigen. Gemischte Portfolio-Elemente werden hier hinzugefügt!', 'portfolio-disclaimer': 'Die hier vorgestellten Projekte werden mit der vollen Zustimmung meiner Kunden präsentiert. Sollten sich die Umstände ändern, können Kunden mich für eine sofortige Entfernung oder Anpassung kontaktieren.', 'testimonials-title': 'Referenzen', 'testimonial-1-text': '"Zuverlässig, schnell und versteht, was ich brauche. JN hat genau das geliefert, was versprochen wurde."', 'testimonial-1-author': '– Sarah Chen, Geschäftsinhaberin', 'testimonial-2-text': '"Hat meinen Arbeitsablauf durch Automatisierung dreimal schneller gemacht. Außergewöhnliche technische Fähigkeiten!"', 'testimonial-2-author': '– Mark Rodriguez, Startup-Gründer', 'contact-title': 'Kontaktieren Sie mich', 'contact-email': 'E-Mail', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn' },
-            ja: { 'light': 'ライト', 'dark': 'ダーク', 'nav-about': '概要', 'nav-services': 'サービス', 'nav-skills': 'スキル', 'nav-portfolio': 'ポートフォリオ', 'nav-contact': '連絡先', 'hero-name': 'JN Gonzales', 'hero-title': 'フリーランステック専門家 | デジタルソリューションプロバイダー', 'hero-tagline': '"アイデアを効率的なデジタルソリューションに変えます。"', 'hero-skills': 'コーディング • 技術サポート • デジタル問題解決', 'hero-cta-work': '私の仕事を見る', 'hero-cta-contact': '連絡を取る', 'about-title': '私について', 'about-text': '私は、コーディング、トラブルシューティング、および幅広いデジタルソリューションの提供に専門知識を持つ、結果重視のフリーランステック専門家です。ウェブサイトの構築、タスクの自動化、技術サポートの提供など、効率的で実用的、信頼性の高い成果を生み出すことに重点を置いています。', 'services-title': 'サービス', 'service-web-title': 'ウェブ開発', 'service-web-desc': '最新技術で構築されたクリーンでレスポンシブなウェブサイト', 'service-automation-title': '自動化とスクリプティング', 'service-automation-desc': 'スマートな自動化スクリプトとワークフローで時間を節約', 'service-support-title': '技術サポート', 'service-support-desc': '専門的なトラブルシューティングとシステム最適化', 'service-data-title': 'データと管理タスク', 'service-data-desc': '整理された、正確で効率的なデータ管理', 'service-research-title': 'リサーチ', 'service-research-desc': '情報に基づいた意思決定のための包括的な調査と分析', 'service-game-title': 'ゲームハッキング', 'service-game-desc': '倫理的なゲームの改造とリバースエンジニアリング', 'skills-title': 'スキル', 'skill-web-dev-title': 'ウェブ開発', 'skill-web-dev-desc': 'レスポンシブでモダンなウェブサイトとアプリケーションの構築。', 'skill-automation-title': '自動化とスクリプティング', 'skill-automation-desc': '反復的なタスクを自動化するためのスマートなスクリプトの作成。', 'skill-support-title': '技術サポート', 'skill-support-desc': 'システムの最適化と専門的なトラブルシューティング。', 'skill-data-title': 'データと管理タスク', 'skill-data-desc': '効率的で整理された正確なデータ処理。', 'skill-research-title': 'リサーチ', 'skill-research-desc': '詳細な分析と洞察に満ちた報告。', 'skill-gamehack-title': 'ゲームハッキング', 'skill-gamehack-desc': 'ゲームのセキュリティ分析とリバースエンジニアリング。', 'portfolio-title': 'ポートフォリオ', 'portfolio-cat-research': '🔍 リサーチ', 'portfolio-cat-programming': '💻 コード＆プログラミング', 'portfolio-cat-admin': '📊 管理', 'portfolio-cat-general': '🛠️ 一般スキル', 'portfolio-research-title': 'リサーチプロジェクト', 'portfolio-research-desc': 'このセクションでは、市場分析、競合調査、データ分析、包括的なレポート作成などの私の研究プロジェクトを紹介します。プロジェクトは近日公開予定です！', 'portfolio-programming-title': 'コード＆プログラミングプロジェクト', 'portfolio-programming-desc': 'ここでは、Webアプリケーション、自動化スクリプト、API、ソフトウェアソリューションなどのコーディングプロジェクトをご覧いただけます。クリーンで効率的でスケーラブルなコードの例がまもなくここに掲載されます！', 'portfolio-admin-title': '管理プロジェクト', 'portfolio-admin-desc': 'このカテゴリでは、データ入力、文書管理、プロセス最適化、組織システムなどの私の管理業務を紹介します。プロフェッショナルな例は近日公開予定です！', 'portfolio-general-title': '一般スキルプロジェクト', 'portfolio-general-desc': 'さまざまな技術スキル、問題解決能力、さまざまなドメインにわたる創造的なソリューションを紹介する多様なプロジェクトのコレクション。混合ポートフォリオアイテムがここに追加されます！', 'portfolio-disclaimer': 'ここに展示されているプロジェクトは、クライアントの完全な同意を得て掲載されています。状況が変化した場合、クライアントは即時の削除または調整のために私に連絡することができます。', 'testimonials-title': 'お客様の声', 'testimonial-1-text': '"信頼でき、速く、私のニーズを理解してくれます。JNは約束どおりのものを正確に提供してくれました。"', 'testimonial-1-author': '– サラ・チェン、事業主', 'testimonial-2-text': '"自動化によって私のワークフローが3倍速くなりました。卓越した技術力です！"', 'testimonial-2-author': '– マーク・ロドリゲス、スタートアップ創設者', 'contact-title': 'お問い合わせ', 'contact-email': 'Eメール', 'contact-facebook': 'フェイスブック', 'contact-instagram': 'インスタグラム', 'contact-linkedin': 'リンクトイン' },
-            zh: { 'light': '浅色', 'dark': '深色', 'nav-about': '关于我', 'nav-services': '服务', 'nav-skills': '技能', 'nav-portfolio': '作品集', 'nav-contact': '联系', 'hero-name': 'JN Gonzales', 'hero-title': '自由职业技术专家 | 数字解决方案提供商', 'hero-tagline': '"我将想法转化为高效的数字解决方案。"', 'hero-skills': '编码 • 技术支持 • 数字问题解决', 'hero-cta-work': '查看我的作品', 'hero-cta-contact': '联系我', 'about-title': '关于我', 'about-text': '我是一名注重结果的自由职业技术专家，在编码、故障排除和提供广泛的数字解决方案方面拥有专业知识。无论是建立网站、自动化任务还是提供技术支持，我都专注于创造高效、实用和可靠的成果。', 'services-title': '服务', 'service-web-title': '网站开发', 'service-web-desc': '使用现代技术构建的干净、响应迅速的网站', 'service-automation-title': '自动化与脚本', 'service-automation-desc': '通过智能自动化脚本和工作流节省时间', 'service-support-title': '技术支持', 'service-support-desc': '专业的故障排除和系统优化', 'service-data-title': '数据与管理任务', 'service-data-desc': '有组织、准确、高效的数据管理', 'service-research-title': '研究', 'service-research-desc': '为明智决策提供全面的研究和分析', 'service-game-title': '游戏黑客', 'service-game-desc': '道德的游戏修改和逆向工程', 'skills-title': '技能', 'skill-web-dev-title': '网站开发', 'skill-web-dev-desc': '构建响应式、现代化的网站和应用程序。', 'skill-automation-title': '自动化与脚本', 'skill-automation-desc': '创建智能脚本以自动化重复性任务。', 'skill-support-title': '技术支持', 'skill-support-desc': '系统优化和专家故障排除。', 'skill-data-title': '数据与管理任务', 'skill-data-desc': '高效、有条理、准确的数据处理。', 'skill-research-title': '研究', 'skill-research-desc': '深入的分析和富有洞察力的报告。', 'skill-gamehack-title': '游戏黑客', 'skill-gamehack-desc': '游戏安全分析和逆向工程。', 'portfolio-title': '作品集', 'portfolio-cat-research': '🔍 研究', 'portfolio-cat-programming': '💻 代码与编程', 'portfolio-cat-admin': '📊 行政', 'portfolio-cat-general': '🛠️ 通用技能', 'portfolio-research-title': '研究项目', 'portfolio-research-desc': '本节将展示我的研究项目，包括市场分析、竞争研究、数据分析和全面的报告工作。项目即将推出！', 'portfolio-programming-title': '代码与编程项目', 'portfolio-programming-desc': '在这里，您将找到我的编码项目，包括Web应用程序、自动化脚本、API和软件解决方案。干净、高效和可扩展的代码示例将很快在此处展示！', 'portfolio-admin-title': '行政项目', 'portfolio-admin-desc': '此类别将显示我的行政工作，包括数据输入、文档管理、流程优化和组织系统。专业示例即将推出！', 'portfolio-general-title': '通用技能项目', 'portfolio-general-desc': '展示各种技术技能、解决问题的能力以及跨不同领域的创造性解决方案的各种项目的集合。混合作品集项目将在此处添加！', 'portfolio-disclaimer': '此处展示的项目均在征得客户完全同意的情况下呈现。如果情况有变，客户可随时联系我进行即时移除或调整。', 'testimonials-title': '客户评价', 'testimonial-1-text': '"可靠、快速，并且了解我的需求。JN 完全按照承诺交付了。"', 'testimonial-1-author': '– 陈莎拉，企业主', 'testimonial-2-text': '"通过自动化，我的工作流程快了3倍。卓越的技术能力！"', 'testimonial-2-author': '– 马克·罗德里格斯，初创公司创始人', 'contact-title': '联系我', 'contact-email': '电子邮件', 'contact-facebook': '脸书', 'contact-instagram': 'Instagram', 'contact-linkedin': '领英' },
-            pt: { 'light': 'Claro', 'dark': 'Escuro', 'nav-about': 'Sobre', 'nav-services': 'Serviços', 'nav-skills': 'Habilidades', 'nav-portfolio': 'Portfólio', 'nav-contact': 'Contato', 'hero-name': 'JN Gonzales', 'hero-title': 'Especialista em Tecnologia Freelancer | Provedor de Soluções Digitais', 'hero-tagline': '"Eu transformo ideias em soluções digitais eficientes."', 'hero-skills': 'Codificação • Suporte Técnico • Resolução de Problemas Digitais', 'hero-cta-work': 'Ver Meu Trabalho', 'hero-cta-contact': 'Entre em Contato', 'about-title': 'Sobre Mim', 'about-text': 'Sou um especialista em tecnologia freelancer orientado a resultados, com experiência em codificação, solução de problemas e entrega de uma ampla gama de soluções digitais. Seja construindo um site, automatizando tarefas ou fornecendo suporte técnico, meu foco é criar resultados eficientes, práticos e confiáveis.', 'services-title': 'Serviços', 'service-web-title': 'Desenvolvimento Web', 'service-web-desc': 'Sites limpos e responsivos construídos com tecnologias modernas', 'service-automation-title': 'Automação e Scripting', 'service-automation-desc': 'Economize tempo com scripts e fluxos de trabalho de automação inteligentes', 'service-support-title': 'Suporte Técnico', 'service-support-desc': 'Solução de problemas profissional e otimização de sistemas', 'service-data-title': 'Dados e Tarefas Administrativas', 'service-data-desc': 'Gerenciamento de dados organizado, preciso e eficiente', 'service-research-title': 'Pesquisa', 'service-research-desc': 'Pesquisa e análise abrangentes para decisões informadas', 'service-game-title': 'Hacking de Jogos', 'service-game-desc': 'Modificação ética de jogos e engenharia reversa', 'skills-title': 'Habilidades', 'skill-web-dev-title': 'Desenvolvimento Web', 'skill-web-dev-desc': 'Construção de sites e aplicativos modernos e responsivos.', 'skill-automation-title': 'Automação e Scripting', 'skill-automation-desc': 'Criação de scripts inteligentes para automatizar tarefas repetitivas.', 'skill-support-title': 'Suporte Técnico', 'skill-support-desc': 'Otimização de sistemas e solução de problemas especializada.', 'skill-data-title': 'Dados e Tarefas Administrativas', 'skill-data-desc': 'Manuseio de dados eficiente, organizado e preciso.', 'skill-research-title': 'Pesquisa', 'skill-research-desc': 'Análise aprofundada e relatórios perspicazes.', 'skill-gamehack-title': 'Hacking de Jogos', 'skill-gamehack-desc': 'Análise de segurança de jogos e engenharia reversa.', 'portfolio-title': 'Portfólio', 'portfolio-cat-research': '🔍 Pesquisa', 'portfolio-cat-programming': '💻 Código e Programação', 'portfolio-cat-admin': '📊 Administrativo', 'portfolio-cat-general': '🛠️ Habilidades Gerais', 'portfolio-research-title': 'Projetos de Pesquisa', 'portfolio-research-desc': 'Esta seção apresentará meus projetos de pesquisa, incluindo análise de mercado, pesquisa competitiva, análise de dados e trabalho de relatório abrangente. Projetos em breve!', 'portfolio-programming-title': 'Projetos de Código e Programação', 'portfolio-programming-desc': 'Aqui você encontrará meus projetos de codificação, incluindo aplicativos da web, scripts de automação, APIs e soluções de software. Exemplos de código limpo, eficiente e escalável serão apresentados aqui em breve!', 'portfolio-admin-title': 'Projetos Administrativos', 'portfolio-admin-desc': 'Esta categoria exibirá meu trabalho administrativo, incluindo entrada de dados, gerenciamento de documentos, otimização de processos e sistemas organizacionais. Exemplos profissionais em breve!', 'portfolio-general-title': 'Projetos de Habilidades Gerais', 'portfolio-general-desc': 'Uma coleção de diversos projetos que mostram várias habilidades técnicas, capacidades de resolução de problemas e soluções criativas em diferentes domínios. Itens de portfólio mistos serão adicionados aqui!', 'portfolio-disclaimer': 'Os projetos aqui apresentados são exibidos com o total consentimento dos meus clientes. Se as circunstâncias mudarem, os clientes podem entrar em contato para remoção ou ajuste imediato.', 'testimonials-title': 'Depoimentos', 'testimonial-1-text': '"Confiável, rápido e entende o que eu preciso. JN entregou exatamente o que foi prometido."', 'testimonial-1-author': '– Sarah Chen, Proprietária de Empresa', 'testimonial-2-text': '"Tornou meu fluxo de trabalho 3x mais rápido com automação. Habilidades técnicas excepcionais!"', 'testimonial-2-author': '– Mark Rodriguez, Fundador de Startup', 'contact-title': 'Entre em Contato', 'contact-email': 'E-mail', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn' },
-            ru: { 'light': 'Светлый', 'dark': 'Темный', 'nav-about': 'Обо мне', 'nav-services': 'Услуги', 'nav-skills': 'Навыки', 'nav-portfolio': 'Портфолио', 'nav-contact': 'Контакты', 'hero-name': 'JN Gonzales', 'hero-title': 'Фрилансер-специалист по технологиям | Поставщик цифровых решений', 'hero-tagline': '"Я превращаю идеи в эффективные цифровые решения."', 'hero-skills': 'Кодирование • Техническая поддержка • Решение цифровых проблем', 'hero-cta-work': 'Посмотреть мои работы', 'hero-cta-contact': 'Связаться', 'about-title': 'Обо мне', 'about-text': 'Я — ориентированный на результат фрилансер-специалист по технологиям с опытом в кодировании, устранении неполадок и предоставлении широкого спектра цифровых решений. Будь то создание веб-сайта, автоматизация задач или предоставление технической поддержки, я сосредотачиваюсь на создании эффективных, практичных и надежных результатов.', 'services-title': 'Услуги', 'service-web-title': 'Веб-разработка', 'service-web-desc': 'Чистые, адаптивные веб-сайты, созданные с использованием современных технологий', 'service-automation-title': 'Автоматизация и скрипты', 'service-automation-desc': 'Экономьте время с помощью умных сценариев автоматизации и рабочих процессов', 'service-support-title': 'Техническая поддержка', 'service-support-desc': 'Профессиональное устранение неполадок и оптимизация системы', 'service-data-title': 'Данные и административные задачи', 'service-data-desc': 'Организованное, точное и эффективное управление данными', 'service-research-title': 'Исследования', 'service-research-desc': 'Всесторонние исследования и анализ для принятия обоснованных решений', 'service-game-title': 'Взлом игр', 'service-game-desc': 'Этичная модификация игр и обратная разработка', 'skills-title': 'Навыки', 'skill-web-dev-title': 'Веб-разработка', 'skill-web-dev-desc': 'Создание адаптивных, современных веб-сайтов и приложений.', 'skill-automation-title': 'Автоматизация и скрипты', 'skill-automation-desc': 'Создание умных скриптов для автоматизации повторяющихся задач.', 'skill-support-title': 'Техническая поддержка', 'skill-support-desc': 'Оптимизация системы и экспертное устранение неполадок.', 'skill-data-title': 'Данные и административные задачи', 'skill-data-desc': 'Эффективная, организованная и точная обработка данных.', 'skill-research-title': 'Исследования', 'skill-research-desc': 'Глубокий анализ и содержательные отчеты.', 'skill-gamehack-title': 'Взлом игр', 'skill-gamehack-desc': 'Анализ безопасности игр и обратная разработка.', 'portfolio-title': 'Портфолио', 'portfolio-cat-research': '🔍 Исследования', 'portfolio-cat-programming': '💻 Код и программирование', 'portfolio-cat-admin': '📊 Административные', 'portfolio-cat-general': '🛠️ Общие навыки', 'portfolio-research-title': 'Исследовательские проекты', 'portfolio-research-desc': 'В этом разделе будут представлены мои исследовательские проекты, включая анализ рынка, конкурентные исследования, анализ данных и комплексную отчетность. Проекты скоро появятся!', 'portfolio-programming-title': 'Проекты по кодированию и программированию', 'portfolio-programming-desc': 'Здесь вы найдете мои проекты по кодированию, включая веб-приложения, сценарии автоматизации, API и программные решения. Примеры чистого, эффективного и масштабируемого кода скоро будут представлены здесь!', 'portfolio-admin-title': 'Административные проекты', 'portfolio-admin-desc': 'В этой категории будут представлены мои административные работы, включая ввод данных, управление документами, оптимизацию процессов и организационные системы. Профессиональные примеры скоро появятся!', 'portfolio-general-title': 'Проекты по общим навыкам', 'portfolio-general-desc': 'Коллекция разнообразных проектов, демонстрирующих различные технические навыки, способности к решению проблем и творческие решения в разных областях. Смешанные элементы портфолио будут добавлены сюда!', 'portfolio-disclaimer': 'Проекты, представленные здесь, демонстрируются с полного согласия моих клиентов. В случае изменения обстоятельств клиенты могут связаться со мной для немедленного удаления или корректировки.', 'testimonials-title': 'Отзывы', 'testimonial-1-text': '"Надежный, быстрый и понимает, что мне нужно. JN выполнил именно то, что обещал."', 'testimonial-1-author': '– Сара Чен, владелица бизнеса', 'testimonial-2-text': '"Сделал мой рабочий процесс в 3 раза быстрее с помощью автоматизации. Исключительные технические навыки!"', 'testimonial-2-author': '– Марк Родригес, основатель стартапа', 'contact-title': 'Свяжитесь со мной', 'contact-email': 'Электронная почта', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn' },
-            ar: { 'light': 'فاتح', 'dark': 'داكن', 'nav-about': 'عني', 'nav-services': 'الخدمات', 'nav-skills': 'المهارات', 'nav-portfolio': 'الأعمال', 'nav-contact': 'اتصل', 'hero-name': 'JN Gonzales', 'hero-title': 'متخصص تقني مستقل | مزود حلول رقمية', 'hero-tagline': '"أحول الأفكار إلى حلول رقمية فعالة."', 'hero-skills': 'البرمجة • الدعم الفني • حل المشكلات الرقمية', 'hero-cta-work': 'عرض أعمالي', 'hero-cta-contact': 'تواصل معي', 'about-title': 'عني', 'about-text': 'أنا متخصص تقني مستقل مدفوع بالنتائج ولدي خبرة في البرمجة واستكشاف الأخطاء وإصلاحها وتقديم مجموعة واسعة من الحلول الرقمية. سواء كان الأمر يتعلق ببناء موقع ويب أو أتمتة المهام أو تقديم الدعم الفني، فإنني أركز على إنشاء نتائج فعالة وعملية وموثوقة.', 'services-title': 'الخدمات', 'service-web-title': 'تطوير الويب', 'service-web-desc': 'مواقع ويب نظيفة وسريعة الاستجابة مبنية بتقنيات حديثة', 'service-automation-title': 'الأتمتة والبرمجة النصية', 'service-automation-desc': 'وفر الوقت باستخدام نصوص الأتمتة الذكية وسير العمل', 'service-support-title': 'الدعم الفني', 'service-support-desc': 'استكشاف الأخطاء وإصلاحها وتحسين النظام بشكل احترافي', 'service-data-title': 'البيانات والمهام الإدارية', 'service-data-desc': 'إدارة بيانات منظمة ودقيقة وفعالة', 'service-research-title': 'البحث', 'service-research-desc': 'بحث وتحليل شاملان لاتخاذ قرارات مستنيرة', 'service-game-title': 'اختراق الألعاب', 'service-game-desc': 'تعديل الألعاب الأخلاقي والهندسة العكسية', 'skills-title': 'المهارات', 'skill-web-dev-title': 'تطوير الويب', 'skill-web-dev-desc': 'بناء مواقع وتطبيقات حديثة وسريعة الاستجابة.', 'skill-automation-title': 'الأتمتة والبرمجة النصية', 'skill-automation-desc': 'إنشاء نصوص ذكية لأتمتة المهام المتكررة.', 'skill-support-title': 'الدعم الفني', 'skill-support-desc': 'تحسين النظام واستكشاف الأخطاء وإصلاحها بخبرة.', 'skill-data-title': 'البيانات والمهام الإدارية', 'skill-data-desc': 'معالجة بيانات فعالة ومنظمة ودقيقة.', 'skill-research-title': 'البحث', 'skill-research-desc': 'تحليل متعمق وتقارير ثاقبة.', 'skill-gamehack-title': 'اختراق الألعاب', 'skill-gamehack-desc': 'تحليل أمان الألعاب والهندسة العكسية.', 'portfolio-title': 'المعرض', 'portfolio-cat-research': '🔍 البحث', 'portfolio-cat-programming': '💻 الكود والبرمجة', 'portfolio-cat-admin': '📊 إداري', 'portfolio-cat-general': '🛠️ المهارات العامة', 'portfolio-research-title': 'مشاريع البحث', 'portfolio-research-desc': 'سيعرض هذا القسم مشاريعي البحثية بما في ذلك تحليل السوق والبحث التنافسي وتحليل البيانات وأعمال التقارير الشاملة. المشاريع قريبا!', 'portfolio-programming-title': 'مشاريع الكود والبرمجة', 'portfolio-programming-desc': 'ستجد هنا مشاريع الترميز الخاصة بي بما في ذلك تطبيقات الويب ونصوص الأتمتة وواجهات برمجة التطبيقات وحلول البرامج. سيتم عرض أمثلة على التعليمات البرمجية النظيفة والفعالة والقابلة للتطوير هنا قريبًا!', 'portfolio-admin-title': 'المشاريع الإدارية', 'portfolio-admin-desc': 'ستعرض هذه الفئة أعمالي الإدارية بما في ذلك إدخال البيانات وإدارة المستندات وتحسين العمليات والأنظمة التنظيمية. أمثلة احترافية قريبًا!', 'portfolio-general-title': 'مشاريع المهارات العامة', 'portfolio-general-desc': 'مجموعة من المشاريع المتنوعة التي تعرض المهارات الفنية المختلفة وقدرات حل المشكلات والحلول الإبداعية عبر مجالات مختلفة. ستتم إضافة عناصر محفظة مختلطة هنا!', 'portfolio-disclaimer': 'المشاريع المعروضة هنا مقدمة بموافقة كاملة من عملائي. إذا تغيرت الظروف، يمكن للعملاء التواصل معي للإزالة الفورية أو التعديل.', 'testimonials-title': 'الشهادات', 'testimonial-1-text': '"موثوق وسريع ويفهم ما أحتاجه. لقد قدم JN بالضبط ما وعد به."', 'testimonial-1-author': '- سارة تشين، صاحبة عمل', 'testimonial-2-text': '"جعل سير عملي أسرع بثلاث مرات بفضل الأتمتة. مهارات تقنية استثنائية!"', 'testimonial-2-author': '- مارك رودريغيز، مؤسس شركة ناشئة', 'contact-title': 'اتصل بي', 'contact-email': 'البريد الإلكتروني', 'contact-facebook': 'فيسبوك', 'contact-instagram': 'انستغرام', 'contact-linkedin': 'لينكد إن' }
+            en: { 'light': 'Light', 'dark': 'Dark', 'nav-about': 'About', 'nav-skills': 'Skills', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Contact', 'hero-name': 'JN Gonzales', 'hero-title': 'Freelance Tech Specialist | Digital Solutions Provider | Problem Solver', 'hero-tagline': '"I turn ideas into efficient digital solutions."', 'hero-skills': 'Coding • Tech Support • Digital Problem-Solving', 'hero-cta-work': 'View My Work', 'hero-cta-contact': 'Get In Touch', 'about-title': 'About Me', 'about-text': 'I\'m a results-driven freelance tech specialist with expertise in coding, troubleshooting, and delivering a wide range of digital solutions. Whether it\'s building a website, automating tasks, or providing technical support, I focus on creating efficient, practical, and reliable outcomes.', 'skills-title': 'Skills', 'skill-web-dev-title': 'Web Development', 'skill-web-dev-desc': 'Building responsive, modern websites and applications.', 'skill-automation-title': 'Automation & Scripting', 'skill-automation-desc': 'Creating smart scripts to automate repetitive tasks.', 'skill-support-title': 'Technical Support', 'skill-support-desc': 'System optimization and expert troubleshooting.', 'skill-data-title': 'Data & Admin Tasks', 'skill-data-desc': 'Efficient, organized, and accurate data handling.', 'skill-research-title': 'Research', 'skill-research-desc': 'In-depth analysis and insightful reporting.', 'skill-gamehack-title': 'Game Hacking', 'skill-gamehack-desc': 'Game security analysis and reverse engineering.', 'skill-disclaimer': 'These are just some of my skills— I’m always learning and can quickly pick up new technologies to meet your project’s specific requirements.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Research', 'portfolio-cat-programming': '💻 Code & Programming', 'portfolio-cat-admin': '📊 Administrative', 'portfolio-cat-general': '🛠️ General Skills', 'project-qr-title': 'QR Nexus: Generator & Scanner', 'project-qr-desc': 'A comprehensive web tool for creating and scanning various QR code types, featuring a history log and clean, futuristic UI.', 'portfolio-disclaimer': 'Projects showcased here are presented with the full consent of my clients. If circumstances change, clients may reach out for immediate removal or adjustment.', 'testimonials-title': 'Testimonials', 'testimonial-1-text': '"Reliable, fast, and understands what I need. JN delivered exactly what was promised."', 'testimonial-1-title': 'Business Owner', 'testimonial-2-text': '"Made my workflow 3x faster with automation. Exceptional technical skills!"', 'testimonial-2-title': 'Startup Founder', 'contact-title': 'Contact Me', 'contact-email': 'Email', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Live Demo', 'chatbot-title': 'AI Assistant', 'chatbot-welcome': 'Hello! I am JN\'s AI assistant. Ask me about his skills, projects, or how to get in touch!', 'chatbot-error': 'Sorry, I\'m having trouble connecting to my brain right now. Please try again later.', 'chatbot-suggestions': ['What are your skills?', 'Tell me about your projects', 'How can I contact you?'], 'chatbot-response-contact': 'You can contact JN via <a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">Email</a> or by clicking the other icons in the <a href="#contact">Contact Section</a>.', 'chatbot-response-skills': 'JN specializes in Web Development, Automation & Scripting, and Technical Support. You can see a more detailed breakdown in the <a href="#skills">Skills Section</a>.', 'chatbot-response-portfolio': 'You can view his featured projects in the <a href="#portfolio">Portfolio Section</a>. The QR Nexus project is a great example of his work!', 'chatbot-response-testimonials': 'You can read what clients have to say in the <a href="#testimonials">Testimonials Section</a>.', 'chatbot-response-who': 'This is the portfolio for JN Gonzales, a freelance tech specialist. You can learn more in the <a href="#about">About Me Section</a>.', 'chatbot-response-greeting': 'Hello! How can I help you today?', 'chatbot-response-help': 'You can ask me about JN\'s skills, projects, or how to contact him. The suggested prompts below can also help!', 'chatbot-response-default': 'I can answer questions about JN\'s skills, projects, and contact information. Try asking something like "What are your skills?" or check out one of the suggested prompts.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. All Rights Reserved.` },
+            es: { 'light': 'Claro', 'dark': 'Oscuro', 'nav-about': 'Sobre Mí', 'nav-skills': 'Habilidades', 'nav-portfolio': 'Portafolio', 'nav-contact': 'Contacto', 'hero-name': 'JN Gonzales', 'hero-title': 'Especialista Técnico Freelance | Proveedor de Soluciones Digitales | Solucionador de Problemas', 'hero-tagline': '"Convierto ideas en soluciones digitales eficientes."', 'hero-skills': 'Codificación • Soporte Técnico • Resolución de Problemas Digitales', 'hero-cta-work': 'Ver Mi Trabajo', 'hero-cta-contact': 'Contáctame', 'about-title': 'Sobre Mí', 'about-text': 'Soy un especialista técnico freelance orientado a resultados con experiencia en codificación, resolución de problemas y entrega de una amplia gama de soluciones digitales. Ya sea construyendo un sitio web, automatizando tareas o brindando soporte técnico, me enfoco en crear resultados eficientes, prácticos y confiables.', 'skills-title': 'Habilidades', 'skill-web-dev-title': 'Desarrollo Web', 'skill-web-dev-desc': 'Construcción de sitios web y aplicaciones modernas y responsivas.', 'skill-automation-title': 'Automatización y Scripts', 'skill-automation-desc': 'Creación de scripts inteligentes para automatizar tareas repetitivas.', 'skill-support-title': 'Soporte Técnico', 'skill-support-desc': 'Optimización de sistemas y resolución de problemas experta.', 'skill-data-title': 'Datos y Tareas Administrativas', 'skill-data-desc': 'Manejo de datos eficiente, organizado y preciso.', 'skill-research-title': 'Investigación', 'skill-research-desc': 'Análisis en profundidad e informes perspicaces.', 'skill-gamehack-title': 'Hacking de Juegos', 'skill-gamehack-desc': 'Análisis de seguridad de juegos e ingeniería inversa.', 'skill-disclaimer': 'Estas son solo algunas de mis habilidades. Siempre estoy aprendiendo y puedo asimilar rápidamente nuevas tecnologías para cumplir con los requisitos específicos de su proyecto.', 'portfolio-title': 'Portafolio', 'portfolio-cat-research': '🔍 Investigación', 'portfolio-cat-programming': '💻 Código y Programación', 'portfolio-cat-admin': '📊 Administrativo', 'portfolio-cat-general': '🛠️ Habilidades Generales', 'project-qr-title': 'QR Nexus: Generador y Escáner', 'project-qr-desc': 'Una herramienta web completa para crear y escanear varios tipos de códigos QR, con un registro de historial y una interfaz de usuario limpia y futurista.', 'portfolio-disclaimer': 'Los proyectos mostrados aquí se presentan con el pleno consentimiento de mis clientes. Si las circunstancias cambian, los clientes pueden contactarme para su eliminación o ajuste inmediato.', 'testimonials-title': 'Testimonios', 'testimonial-1-text': '"Confiable, rápido y entiende lo que necesito. JN entregó exactamente lo que prometió."', 'testimonial-1-title': 'Dueña de Negocio', 'testimonial-2-text': '"Hizo mi flujo de trabajo 3 veces más rápido con la automatización. ¡Habilidades técnicas excepcionales!"', 'testimonial-2-title': 'Fundador de Startup', 'contact-title': 'Contáctame', 'contact-email': 'Correo Electrónico', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Demo en Vivo', 'chatbot-title': 'Asistente de IA', 'chatbot-welcome': '¡Hola! Soy el asistente de IA de JN. Pregúntame sobre sus habilidades, proyectos o cómo contactarlo.', 'chatbot-error': 'Lo siento, estoy teniendo problemas para conectarme a mi cerebro en este momento. Por favor, inténtalo de nuevo más tarde.', 'chatbot-suggestions': ['¿Cuáles son tus habilidades?', 'Háblame de tus proyectos', '¿Cómo puedo contactarte?'], 'chatbot-response-contact': 'Puedes contactar a JN por <a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">correo electrónico</a> o haciendo clic en los otros iconos en la <a href="#contact">Sección de Contacto</a>.', 'chatbot-response-skills': 'JN se especializa en Desarrollo Web, Automatización y Scripting, y Soporte Técnico. Puedes ver un desglose más detallado en la <a href="#skills">Sección de Habilidades</a>.', 'chatbot-response-portfolio': 'Puedes ver sus proyectos destacados en la <a href="#portfolio">Sección de Portafolio</a>. ¡El proyecto QR Nexus es un gran ejemplo de su trabajo!', 'chatbot-response-testimonials': 'Puedes leer lo que los clientes dicen en la <a href="#testimonials">Sección de Testimonios</a>.', 'chatbot-response-who': 'Este es el portafolio de JN Gonzales, un especialista técnico freelance. Puedes aprender más en la <a href="#about">Sección Sobre Mí</a>.', 'chatbot-response-greeting': '¡Hola! ¿En qué puedo ayudarte hoy?', 'chatbot-response-help': 'Puedes preguntarme sobre las habilidades, proyectos o cómo contactar a JN. ¡Las sugerencias a continuación también pueden ayudar!', 'chatbot-response-default': 'Puedo responder preguntas sobre las habilidades, proyectos e información de contacto de JN. Intenta preguntar algo como "¿Cuáles son tus habilidades?" o mira una de las sugerencias.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Todos los derechos reservados.` },
+            // ... (other languages updated similarly) ...
+            fr: { 'light': 'Clair', 'dark': 'Sombre', 'nav-about': 'À propos', 'nav-skills': 'Compétences', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Contact', 'hero-name': 'JN Gonzales', 'hero-title': 'Spécialiste Technique Freelance | Fournisseur de Solutions Numériques | Résolveur de Problèmes', 'hero-tagline': '"Je transforme les idées en solutions numériques efficaces."', 'hero-skills': 'Codage • Support Technique • Résolution de Problèmes Numériques', 'hero-cta-work': 'Voir Mon Travail', 'hero-cta-contact': 'Me Contacter', 'about-title': 'À propos de Moi', 'about-text': 'Je suis un spécialiste technique freelance axé sur les résultats avec une expertise en codage, dépannage et livraison d\'une large gamme de solutions numériques. Qu\'il s\'agisse de construire un site web, d\'automatiser des tâches ou de fournir un support technique, je me concentre sur la création de résultats efficaces, pratiques et fiables.', 'skills-title': 'Compétences', 'skill-web-dev-title': 'Développement Web', 'skill-web-dev-desc': 'Création de sites web et d\'applications modernes et réactifs.', 'skill-automation-title': 'Automatisation et Scripting', 'skill-automation-desc': 'Création de scripts intelligents pour automatiser les tâches répétitives.', 'skill-support-title': 'Support Technique', 'skill-support-desc': 'Optimisation du système et dépannage expert.', 'skill-data-title': 'Données et Tâches Administratives', 'skill-data-desc': 'Gestion des données efficace, organisée et précise.', 'skill-research-title': 'Recherche', 'skill-research-desc': 'Analyse approfondie et rapports pertinents.', 'skill-gamehack-title': 'Piratage de Jeux', 'skill-gamehack-desc': 'Analyse de la sécurité des jeux et ingénierie inverse.', 'skill-disclaimer': 'Note : Cette liste n\'est pas exhaustive. Je m\'épanouis en apprenant de nouvelles technologies et je peux m\'adapter rapidement aux besoins spécifiques de votre projet.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Recherche', 'portfolio-cat-programming': '💻 Code & Programmation', 'portfolio-cat-admin': '📊 Administratif', 'portfolio-cat-general': '🛠️ Compétences Générales', 'project-qr-title': 'QR Nexus : Générateur & Scanner', 'project-qr-desc': 'Un outil Web complet pour créer et numériser différents types de codes QR, doté d\'un journal d\'historique et d\'une interface utilisateur propre et futuriste.', 'portfolio-disclaimer': 'Les projets présentés ici le sont avec le consentement total de mes clients. Si les circonstances changent, les clients peuvent me contacter pour un retrait ou un ajustement immédiat.', 'testimonials-title': 'Témoignages', 'testimonial-1-text': '"Fiable, rapide, et comprend ce dont j\'ai besoin. JN a livré exactement ce qui était promis."', 'testimonial-1-title': 'Propriétaire d\'entreprise', 'testimonial-2-text': '"A rendu mon flux de travail 3 fois plus rapide avec l\'automatisation. Compétences techniques exceptionnelles!"', 'testimonial-2-title': 'Fondateur de Startup', 'contact-title': 'Me Contacter', 'contact-email': 'Email', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Démo en Direct', 'chatbot-title': 'Assistant IA', 'chatbot-welcome': 'Bonjour ! Je suis l\'assistant IA de JN. Demandez-moi sur ses compétences, ses projets, ou comment le contacter.', 'chatbot-error': 'Désolé, j\'ai des difficultés à me connecter à mon cerveau en ce moment. Veuillez réessayer plus tard.', 'chatbot-suggestions': ['Quelles sont vos compétences?', 'Parlez-moi de vos projets', 'Comment puis-je vous contacter?'], 'chatbot-response-contact': 'Vous pouvez contacter JN par <a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">E-mail</a> ou en cliquant sur les autres icônes dans la <a href="#contact">Section Contact</a>.', 'chatbot-response-skills': 'JN est spécialisé dans le Développement Web, l\'Automatisation et le Scripting, et le Support Technique. Vous pouvez voir une description plus détaillée dans la <a href="#skills">Section Compétences</a>.', 'chatbot-response-portfolio': 'Vous pouvez voir ses projets en vedette dans la <a href="#portfolio">Section Portfolio</a>. Le projet QR Nexus est un excellent exemple de son travail !', 'chatbot-response-testimonials': 'Vous pouvez lire ce que les clients ont à dire dans la <a href="#testimonials">Section Témoignages</a>.', 'chatbot-response-who': 'Ceci est le portfolio de JN Gonzales, un spécialiste technique freelance. Vous pouvez en savoir plus dans la <a href="#about">Section À propos de moi</a>.', 'chatbot-response-greeting': 'Bonjour ! Comment puis-je vous aider aujourd\'hui ?', 'chatbot-response-help': 'Vous pouvez me poser des questions sur les compétences, les projets de JN ou comment le contacter. Les invites suggérées ci-dessous peuvent également vous aider !', 'chatbot-response-default': 'Je peux répondre aux questions sur les compétences, les projets et les coordonnées de JN. Essayez de demander quelque chose comme "Quelles sont vos compétences ?" ou consultez l\'une des invites suggérées.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Tous droits réservés.` },
+            de: { 'light': 'Hell', 'dark': 'Dunkel', 'nav-about': 'Über Mich', 'nav-skills': 'Fähigkeiten', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Kontakt', 'hero-name': 'JN Gonzales', 'hero-title': 'Freiberuflicher Tech-Spezialist | Anbieter digitaler Lösungen | Problemlöser', 'hero-tagline': '"Ich verwandle Ideen in effiziente digitale Lösungen."', 'hero-skills': 'Codierung • Technischer Support • Digitale Problemlösung', 'hero-cta-work': 'Meine Arbeit ansehen', 'hero-cta-contact': 'Kontakt aufnehmen', 'about-title': 'Über Mich', 'about-text': 'Ich bin ein ergebnisorientierter freiberuflicher Tech-Spezialist mit Expertise in Codierung, Fehlerbehebung und der Bereitstellung einer breiten Palette digitaler Lösungen. Ob es um die Erstellung einer Website, die Automatisierung von Aufgaben oder die Bereitstellung von technischem Support geht, ich konzentriere mich auf die Schaffung effizienter, praktischer und zuverlässiger Ergebnisse.', 'skills-title': 'Fähigkeiten', 'skill-web-dev-title': 'Webentwicklung', 'skill-web-dev-desc': 'Erstellung von responsiven, modernen Websites und Anwendungen.', 'skill-automation-title': 'Automatisierung & Scripting', 'skill-automation-desc': 'Erstellung intelligenter Skripte zur Automatisierung wiederkehrender Aufgaben.', 'skill-support-title': 'Technischer Support', 'skill-support-desc': 'Systemoptimierung und fachkundige Fehlerbehebung.', 'skill-data-title': 'Daten & Verwaltungsaufgaben', 'skill-data-desc': 'Effiziente, organisierte und genaue Datenverarbeitung.', 'skill-research-title': 'Forschung', 'skill-research-desc': 'Tiefgehende Analyse und aufschlussreiche Berichterstattung.', 'skill-gamehack-title': 'Game Hacking', 'skill-gamehack-desc': 'Spiel-Sicherheitsanalyse und Reverse Engineering.', 'skill-disclaimer': 'Hinweis: Diese Liste ist nicht vollständig. Ich lerne gerne neue Technologien und kann mich schnell an die spezifischen Anforderungen Ihres Projekts anpassen.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Forschung', 'portfolio-cat-programming': '💻 Code & Programmierung', 'portfolio-cat-admin': '📊 Administrativ', 'portfolio-cat-general': '🛠️ Allgemeine Fähigkeiten', 'project-qr-title': 'QR Nexus: Generator & Scanner', 'project-qr-desc': 'Ein umfassendes Web-Tool zum Erstellen und Scannen verschiedener QR-Code-Typen mit Verlaufsprotokoll und sauberer, futuristischer Benutzeroberfläche.', 'portfolio-disclaimer': 'Die hier vorgestellten Projekte werden mit der vollen Zustimmung meiner Kunden präsentiert. Sollten sich die Umstände ändern, können Kunden mich für eine sofortige Entfernung oder Anpassung kontaktieren.', 'testimonials-title': 'Referenzen', 'testimonial-1-text': '"Zuverlässig, schnell und versteht, was ich brauche. JN hat genau das geliefert, was versprochen wurde."', 'testimonial-1-title': 'Geschäftsinhaberin', 'testimonial-2-text': '"Hat meinen Arbeitsablauf durch Automatisierung dreimal schneller gemacht. Außergewöhnliche technische Fähigkeiten!"', 'testimonial-2-title': 'Startup-Gründer', 'contact-title': 'Kontaktieren Sie mich', 'contact-email': 'E-Mail', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Live-Demo', 'chatbot-title': 'KI-Assistent', 'chatbot-welcome': 'Hallo! Ich bin der KI-Assistent von JN. Fragen Sie mich nach seinen Fähigkeiten, Projekten oder wie Sie ihn kontaktieren können.', 'chatbot-error': 'Entschuldigung, ich habe im Moment Probleme, eine Verbindung zu meinem Gehirn herzustellen. Bitte versuchen Sie es später erneut.', 'chatbot-suggestions': ['Was sind Ihre Fähigkeiten?', 'Erzählen Sie mir von Ihren Projekten', 'Wie kann ich Sie kontaktieren?'], 'chatbot-response-contact': 'Sie können JN per <a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">E-Mail</a> kontaktieren oder auf die anderen Symbole im <a href="#contact">Kontaktbereich</a> klicken.', 'chatbot-response-skills': 'JN ist spezialisiert auf Webentwicklung, Automatisierung & Scripting und technischen Support. Eine detailliertere Aufschlüsselung finden Sie im <a href="#skills">Fähigkeiten-Bereich</a>.', 'chatbot-response-portfolio': 'Sie können seine vorgestellten Projekte im <a href="#portfolio">Portfolio-Bereich</a> ansehen. Das QR Nexus-Projekt ist ein großartiges Beispiel für seine Arbeit!', 'chatbot-response-testimonials': 'Sie können im <a href="#testimonials">Referenzen-Bereich</a> lesen, was Kunden zu sagen haben.', 'chatbot-response-who': 'Dies ist das Portfolio von JN Gonzales, einem freiberuflichen Tech-Spezialisten. Mehr erfahren Sie im <a href="#about">Über-mich-Bereich</a>.', 'chatbot-response-greeting': 'Hallo! Wie kann ich Ihnen heute helfen?', 'chatbot-response-help': 'Sie können mich nach den Fähigkeiten und Projekten von JN fragen oder wie Sie ihn kontaktieren können. Die vorgeschlagenen Anregungen unten können ebenfalls helfen!', 'chatbot-response-default': 'Ich kann Fragen zu den Fähigkeiten, Projekten und Kontaktinformationen von JN beantworten. Versuchen Sie, etwas wie "Was sind Ihre Fähigkeiten?" zu fragen oder sehen Sie sich eine der vorgeschlagenen Anregungen an.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Alle Rechte vorbehalten.` },
+            ja: { 'light': 'ライト', 'dark': 'ダーク', 'nav-about': '概要', 'nav-skills': 'スキル', 'nav-portfolio': 'ポートフォリオ', 'nav-contact': '連絡先', 'hero-name': 'JN Gonzales', 'hero-title': 'フリーランステック専門家 | デジタルソリューションプロバイダー | 問題解決者', 'hero-tagline': '"アイデアを効率的なデジタルソリューションに変えます。"', 'hero-skills': 'コーディング • 技術サポート • デジタル問題解決', 'hero-cta-work': '私の仕事を見る', 'hero-cta-contact': '連絡を取る', 'about-title': '私について', 'about-text': '私は、コーディング、トラブルシューティング、および幅広いデジタルソリューションの提供に専門知識を持つ、結果重視のフリーランステック専門家です。ウェブサイトの構築、タスクの自動化、技術サポートの提供など、効率的で実用的、信頼性の高い成果を生み出すことに重点を置いています。', 'skills-title': 'スキル', 'skill-web-dev-title': 'ウェブ開発', 'skill-web-dev-desc': 'レスポンシブでモダンなウェブサイトとアプリケーションの構築。', 'skill-automation-title': '自動化とスクリプティング', 'skill-automation-desc': '反復的なタスクを自動化するためのスマートなスクリプトの作成。', 'skill-support-title': '技術サポート', 'skill-support-desc': 'システムの最適化と専門的なトラブルシューティング。', 'skill-data-title': 'データと管理タスク', 'skill-data-desc': '効率的で整理された正確なデータ処理。', 'skill-research-title': 'リサーチ', 'skill-research-desc': '詳細な分析と洞察に満ちた報告。', 'skill-gamehack-title': 'ゲームハッキング', 'skill-gamehack-desc': 'ゲームのセキュリティ分析とリバースエンジニアリング。', 'skill-disclaimer': '注：このリストはすべてを網羅しているわけではありません。私は新しい技術を学ぶことに意欲的で、プロジェクトの特定の要件に迅速に適応できます。', 'portfolio-title': 'ポートフォリオ', 'portfolio-cat-research': '🔍 リサーチ', 'portfolio-cat-programming': '💻 コード＆プログラミング', 'portfolio-cat-admin': '📊 管理', 'portfolio-cat-general': '🛠️ 一般スキル', 'project-qr-title': 'QRネクサス：ジェネレーター＆スキャナー', 'project-qr-desc': '履歴ログとクリーンで未来的なUIを備えた、さまざまなQRコードタイプを作成およびスキャンするための包括的なWebツール。', 'portfolio-disclaimer': 'ここに展示されているプロジェクトは、クライアントの完全な同意を得て掲載されています。状況が変化した場合、クライアントは即時の削除または調整のために私に連絡することができます。', 'testimonials-title': 'お客様の声', 'testimonial-1-text': '"信頼でき、速く、私のニーズを理解してくれます。JNは約束どおりのものを正確に提供してくれました。"', 'testimonial-1-title': '事業主', 'testimonial-2-text': '"自動化によって私のワークフローが3倍速くなりました。卓越した技術力です！"', 'testimonial-2-title': 'スタートアップ創設者', 'contact-title': 'お問い合わせ', 'contact-email': 'Eメール', 'contact-facebook': 'フェイスブック', 'contact-instagram': 'インスタグラム', 'contact-linkedin': 'リンクトイン', 'portfolio-demo': 'ライブデモ', 'chatbot-title': 'AIアシスタント', 'chatbot-welcome': 'こんにちは！私はJNのAIアシスタントです。彼のスキル、プロジェクト、連絡方法についてお尋ねください。', 'chatbot-error': '申し訳ありませんが、現在、私の脳に接続できません。後でもう一度お試しください。', 'chatbot-suggestions': ['あなたのスキルは何ですか？', 'あなたのプロジェクトについて教えてください', 'どうすれば連絡できますか？'], 'chatbot-response-contact': 'JNへは<a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">メール</a>で連絡するか、<a href="#contact">連絡先セクション</a>の他のアイコンをクリックしてください。', 'chatbot-response-skills': 'JNはウェブ開発、自動化とスクリプティング、技術サポートを専門としています。<a href="#skills">スキルセクション</a>で詳細な内訳を見ることができます。', 'chatbot-response-portfolio': '彼の特集プロジェクトは<a href="#portfolio">ポートフォリオセクション</a>で見ることができます。QR Nexusプロジェクトは彼の仕事の素晴らしい例です！', 'chatbot-response-testimonials': '<a href="#testimonials">お客様の声セクション</a>でクライアントの意見を読むことができます。', 'chatbot-response-who': 'これはフリーランステック専門家であるJN Gonzalesのポートフォリオです。<a href="#about">概要セクション</a>で詳細を知ることができます。', 'chatbot-response-greeting': 'こんにちは！今日はどのようにお手伝いできますか？', 'chatbot-response-help': 'JNのスキル、プロジェクト、または連絡方法について質問できます。以下の提案されたプロンプトも役立ちます！', 'chatbot-response-default': 'JNのスキル、プロジェクト、連絡先情報に関する質問にお答えできます。「あなたのスキルは何ですか？」のように質問するか、提案されたプロンプトのいずれかを確認してください。', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. 無断複写・転載を禁じます。` },
+            zh: { 'light': '浅色', 'dark': '深色', 'nav-about': '关于我', 'nav-skills': '技能', 'nav-portfolio': '作品集', 'nav-contact': '联系', 'hero-name': 'JN Gonzales', 'hero-title': '自由职业技术专家 | 数字解决方案提供商 | 问题解决者', 'hero-tagline': '"我将想法转化为高效的数字解决方案。"', 'hero-skills': '编码 • 技术支持 • 数字问题解决', 'hero-cta-work': '查看我的作品', 'hero-cta-contact': '联系我', 'about-title': '关于我', 'about-text': '我是一名注重结果的自由职业技术专家，在编码、故障排除和提供广泛的数字解决方案方面拥有专业知识。无论是建立网站、自动化任务还是提供技术支持，我都专注于创造高效、实用和可靠的成果。', 'skills-title': '技能', 'skill-web-dev-title': '网站开发', 'skill-web-dev-desc': '构建响应式、现代化的网站和应用程序。', 'skill-automation-title': '自动化与脚本', 'skill-automation-desc': '创建智能脚本以自动化重复性任务。', 'skill-support-title': '技术支持', 'skill-support-desc': '系统优化和专家故障排除。', 'skill-data-title': '数据与管理任务', 'skill-data-desc': '高效、有条理、准确的数据处理。', 'skill-research-title': '研究', 'skill-research-desc': '深入的分析和富有洞察力的报告。', 'skill-gamehack-title': '游戏黑客', 'skill-gamehack-desc': '游戏安全分析和逆向工程。', 'skill-disclaimer': '注意：此列表并非详尽无遗。我热衷于学习新技术，并能迅速适应您项目的特定要求。', 'portfolio-title': '作品集', 'portfolio-cat-research': '🔍 研究', 'portfolio-cat-programming': '💻 代码与编程', 'portfolio-cat-admin': '📊 行政', 'portfolio-cat-general': '🛠️ 通用技能', 'project-qr-title': 'QR中心：生成器和扫描仪', 'project-qr-desc': '一个用于创建和扫描各种QR码类型的综合性Web工具，具有历史记录和简洁、未来派的UI。', 'portfolio-disclaimer': '此处展示的项目均在征得客户完全同意的情况下呈现。如果情况有变，客户可随时联系我进行即时移除或调整。', 'testimonials-title': '客户评价', 'testimonial-1-text': '"可靠、快速，并且了解我的需求。JN 完全按照承诺交付了。"', 'testimonial-1-title': '企业主', 'testimonial-2-text': '"通过自动化，我的工作流程快了3倍。卓越的技术能力！"', 'testimonial-2-title': '初创公司创始人', 'contact-title': '联系我', 'contact-email': '电子邮件', 'contact-facebook': '脸书', 'contact-instagram': 'Instagram', 'contact-linkedin': '领英', 'portfolio-demo': '现场演示', 'chatbot-title': 'AI助理', 'chatbot-welcome': '你好！我是JN的AI助理。可以向我询问他的技能、项目或联系方式。', 'chatbot-error': '抱歉，我现在无法连接到我的大脑。请稍后再试。', 'chatbot-suggestions': ['你有哪些技能？', '告诉我你的项目', '我该如何联系你？'], 'chatbot-response-contact': '您可以通过<a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">电子邮件</a>联系JN，或单击<a href="#contact">联系部分</a>中的其他图标。', 'chatbot-response-skills': 'JN擅长Web开发、自动化与脚本以及技术支持。您可以在<a href="#skills">技能部分</a>查看更详细的分类。', 'chatbot-response-portfolio': '您可以在<a href="#portfolio">作品集部分</a>查看他的特色项目。QR Nexus项目是他工作的一个很好的例子！', 'chatbot-response-testimonials': '您可以在<a href="#testimonials">客户评价部分</a>阅读客户的评价。', 'chatbot-response-who': '这是自由职业技术专家JN Gonzales的作品集。您可以在<a href="#about">关于我部分</a>了解更多信息。', 'chatbot-response-greeting': '你好！今天我能帮你什么？', 'chatbot-response-help': '您可以向我询问JN的技能、项目或如何联系他。下面的建议提示也可以帮助！', 'chatbot-response-default': '我可以回答有关JN的技能、项目和联系信息的问题。尝试问一些类似“你有什么技能？”的问题，或者查看建议的提示之一。', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. 版权所有。` },
+            pt: { 'light': 'Claro', 'dark': 'Escuro', 'nav-about': 'Sobre', 'nav-skills': 'Habilidades', 'nav-portfolio': 'Portfólio', 'nav-contact': 'Contato', 'hero-name': 'JN Gonzales', 'hero-title': 'Especialista em Tecnologia Freelancer | Provedor de Soluções Digitais | Solucionador de Problemas', 'hero-tagline': '"Eu transformo ideias em soluções digitais eficientes."', 'hero-skills': 'Codificação • Suporte Técnico • Resolução de Problemas Digitais', 'hero-cta-work': 'Ver Meu Trabalho', 'hero-cta-contact': 'Entre em Contato', 'about-title': 'Sobre Mim', 'about-text': 'Sou um especialista em tecnologia freelancer orientado a resultados, com experiência em codificação, solução de problemas e entrega de uma ampla gama de soluções digitais. Seja construindo um site, automatizando tarefas ou fornecendo suporte técnico, meu foco é criar resultados eficientes, práticos e confiáveis.', 'skills-title': 'Habilidades', 'skill-web-dev-title': 'Desenvolvimento Web', 'skill-web-dev-desc': 'Construção de sites e aplicativos modernos e responsivos.', 'skill-automation-title': 'Automação e Scripting', 'skill-automation-desc': 'Criação de scripts inteligentes para automatizar tarefas repetitivas.', 'skill-support-title': 'Suporte Técnico', 'skill-support-desc': 'Otimização de sistemas e solução de problemas especializada.', 'skill-data-title': 'Dados e Tarefas Administrativas', 'skill-data-desc': 'Manuseio de dados eficiente, organizado e preciso.', 'skill-research-title': 'Pesquisa', 'skill-research-desc': 'Análise aprofundada e relatórios perspicazes.', 'skill-gamehack-title': 'Hacking de Jogos', 'skill-gamehack-desc': 'Análise de segurança de jogos e engenharia reversa.', 'skill-disclaimer': 'Nota: Esta lista não é exaustiva. Eu prospero aprendendo novas tecnologias e posso me adaptar rapidamente às necessidades específicas do seu projeto.', 'portfolio-title': 'Portfólio', 'portfolio-cat-research': '🔍 Pesquisa', 'portfolio-cat-programming': '💻 Código e Programação', 'portfolio-cat-admin': '📊 Administrativo', 'portfolio-cat-general': '🛠️ Habilidades Gerais', 'project-qr-title': 'QR Nexus: Gerador e Scanner', 'project-qr-desc': 'Uma ferramenta web abrangente para criar e escanear vários tipos de código QR, com um registro de histórico e uma interface de usuário limpa e futurista.', 'portfolio-disclaimer': 'Os projetos aqui apresentados são exibidos com o total consentimento dos meus clientes. Se as circunstâncias mudarem, os clientes podem entrar em contato para remoção ou ajuste imediato.', 'testimonials-title': 'Depoimentos', 'testimonial-1-text': '"Confiável, rápido e entende o que eu preciso. JN entregou exatamente o que foi prometido."', 'testimonial-1-title': 'Proprietária de Empresa', 'testimonial-2-text': '"Tornou meu fluxo de trabalho 3x mais rápido com automação. Habilidades técnicas excepcionais!"', 'testimonial-2-title': 'Fundador de Startup', 'contact-title': 'Entre em Contato', 'contact-email': 'E-mail', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Demonstração ao Vivo', 'chatbot-title': 'Assistente de IA', 'chatbot-welcome': 'Olá! Sou o assistente de IA do JN. Pergunte-me sobre suas habilidades, projetos ou como entrar em contato.', 'chatbot-error': 'Desculpe, estou com problemas para me conectar ao meu cérebro agora. Por favor, tente novamente mais tarde.', 'chatbot-suggestions': ['Quais são suas habilidades?', 'Fale-me sobre seus projetos', 'Como posso entrar em contato?'], 'chatbot-response-contact': 'Você pode contatar JN por <a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">E-mail</a> ou clicando nos outros ícones na <a href="#contact">Seção de Contato</a>.', 'chatbot-response-skills': 'JN é especializado em Desenvolvimento Web, Automação e Scripting e Suporte Técnico. Você pode ver uma análise mais detalhada na <a href="#skills">Seção de Habilidades</a>.', 'chatbot-response-portfolio': 'Você pode ver seus projetos em destaque na <a href="#portfolio">Seção de Portfólio</a>. O projeto QR Nexus é um ótimo exemplo de seu trabalho!', 'chatbot-response-testimonials': 'Você pode ler o que os clientes dizem na <a href="#testimonials">Seção de Depoimentos</a>.', 'chatbot-response-who': 'Este é o portfólio de JN Gonzales, um especialista em tecnologia freelancer. Você pode saber mais na <a href="#about">Seção Sobre Mim</a>.', 'chatbot-response-greeting': 'Olá! Como posso ajudar hoje?', 'chatbot-response-help': 'Você pode me perguntar sobre as habilidades, projetos do JN ou como contatá-lo. As sugestões abaixo também podem ajudar!', 'chatbot-response-default': 'Eu posso responder perguntas sobre as habilidades, projetos e informações de contato do JN. Tente perguntar algo como "Quais são suas habilidades?" ou confira uma das sugestões.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Todos os direitos reservados.` },
+            ru: { 'light': 'Светлый', 'dark': 'Темный', 'nav-about': 'Обо мне', 'nav-skills': 'Навыки', 'nav-portfolio': 'Портфолио', 'nav-contact': 'Контакты', 'hero-name': 'JN Gonzales', 'hero-title': 'Фрилансер-специалист по технологиям | Поставщик цифровых решений | Решатель проблем', 'hero-tagline': '"Я превращаю идеи в эффективные цифровые решения."', 'hero-skills': 'Кодирование • Техническая поддержка • Решение цифровых проблем', 'hero-cta-work': 'Посмотреть мои работы', 'hero-cta-contact': 'Связаться', 'about-title': 'Обо мне', 'about-text': 'Я — ориентированный на результат фрилансер-специалист по технологиям с опытом в кодировании, устранении неполадок и предоставлении широкого спектра цифровых решений. Будь то создание веб-сайта, автоматизация задач или предоставление технической поддержки, я сосредотачиваюсь на создании эффективных, практичных и надежных результатов.', 'skills-title': 'Навыки', 'skill-web-dev-title': 'Веб-разработка', 'skill-web-dev-desc': 'Создание адаптивных, современных веб-сайтов и приложений.', 'skill-automation-title': 'Автоматизация и скрипты', 'skill-automation-desc': 'Создание умных скриптов для автоматизации повторяющихся задач.', 'skill-support-title': 'Техническая поддержка', 'skill-support-desc': 'Оптимизация системы и экспертное устранение неполадок.', 'skill-data-title': 'Данные и административные задачи', 'skill-data-desc': 'Эффективная, организованная и точная обработка данных.', 'skill-research-title': 'Исследования', 'skill-research-desc': 'Глубокий анализ и содержательные отчеты.', 'skill-gamehack-title': 'Взлом игр', 'skill-gamehack-desc': 'Анализ безопасности игр и обратная разработка.', 'skill-disclaimer': 'Примечание: Этот список не является исчерпывающим. Я с удовольствием изучаю новые технологии и могу быстро адаптироваться к конкретным требованиям вашего проекта.', 'portfolio-title': 'Портфолио', 'portfolio-cat-research': '🔍 Исследования', 'portfolio-cat-programming': '💻 Код и программирование', 'portfolio-cat-admin': '📊 Административные', 'portfolio-cat-general': '🛠️ Общие навыки', 'project-qr-title': 'QR Nexus: Генератор и сканер', 'project-qr-desc': 'Комплексный веб-инструмент для создания и сканирования различных типов QR-кодов с журналом истории и чистым футуристическим пользовательским интерфейсом.', 'portfolio-disclaimer': 'Проекты, представленные здесь, демонстрируются с полного согласия моих клиентов. В случае изменения обстоятельств клиенты могут связаться со мной для немедленного удаления или корректировки.', 'testimonials-title': 'Отзывы', 'testimonial-1-text': '"Надежный, быстрый и понимает, что мне нужно. JN выполнил именно то, что обещал."', 'testimonial-1-title': 'владелица бизнеса', 'testimonial-2-text': '"Сделал мой рабочий процесс в 3 раза быстрее с помощью автоматизации. Исключительные технические навыки!"', 'testimonial-2-title': 'основатель стартапа', 'contact-title': 'Свяжитесь со мной', 'contact-email': 'Электронная почта', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Живая демонстрация', 'chatbot-title': 'ИИ-ассистент', 'chatbot-welcome': 'Здравствуйте! Я ИИ-ассистент JN. Спросите меня о его навыках, проектах или о том, как с ним связаться.', 'chatbot-error': 'К сожалению, у меня возникли проблемы с подключением к моему мозгу. Пожалуйста, попробуйте позже.', 'chatbot-suggestions': ['Какие у вас навыки?', 'Расскажите о ваших проектах', 'Как с вами связаться?'], 'chatbot-response-contact': 'Вы можете связаться с JN по <a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">электронной почте</a> или нажав на другие значки в <a href="#contact">разделе контактов</a>.', 'chatbot-response-skills': 'JN специализируется на веб-разработке, автоматизации и написании скриптов, а также на технической поддержке. Более подробную информацию вы можете найти в <a href="#skills">разделе навыков</a>.', 'chatbot-response-portfolio': 'Вы можете просмотреть его избранные проекты в <a href="#portfolio">разделе портфолио</a>. Проект QR Nexus — отличный пример его работы!', 'chatbot-response-testimonials': 'Вы можете прочитать отзывы клиентов в <a href="#testimonials">разделе отзывов</a>.', 'chatbot-response-who': 'Это портфолио JN Gonzales, фриланс-специалиста по технологиям. Вы можете узнать больше в <a href="#about">разделе "Обо мне"</a>.', 'chatbot-response-greeting': 'Здравствуйте! Чем я могу вам сегодня помочь?', 'chatbot-response-help': 'Вы можете спросить меня о навыках, проектах JN или о том, как с ним связаться. Предложенные ниже подсказки также могут помочь!', 'chatbot-response-default': 'Я могу ответить на вопросы о навыках, проектах и контактной информации JN. Попробуйте задать что-то вроде "Какие у вас навыки?" или ознакомьтесь с одной из предложенных подсказок.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Все права защищены.` },
+            ar: { 'light': 'فاتح', 'dark': 'داكن', 'nav-about': 'عني', 'nav-skills': 'المهارات', 'nav-portfolio': 'الأعمال', 'nav-contact': 'اتصل', 'hero-name': 'JN Gonzales', 'hero-title': 'متخصص تقني مستقل | مزود حلول رقمية | حلال المشاكل', 'hero-tagline': '"أحول الأفكار إلى حلول رقمية فعالة."', 'hero-skills': 'البرمجة • الدعم الفني • حل المشكلات الرقمية', 'hero-cta-work': 'عرض أعمالي', 'hero-cta-contact': 'تواصل معي', 'about-title': 'عني', 'about-text': 'أنا متخصص تقني مستقل مدفوع بالنتائج ولدي خبرة في البرمجة واستكشاف الأخطاء وإصلاحها وتقديم مجموعة واسعة من الحلول الرقمية. سواء كان الأمر يتعلق ببناء موقع ويب أو أتمتة المهام أو تقديم الدعم الفني، فإنني أركز على إنشاء نتائج فعالة وعملية وموثوقة.', 'skills-title': 'المهارات', 'skill-web-dev-title': 'تطوير الويب', 'skill-web-dev-desc': 'بناء مواقع وتطبيقات حديثة وسريعة الاستجابة.', 'skill-automation-title': 'الأتمتة والبرمجة النصية', 'skill-automation-desc': 'إنشاء نصوص ذكية لأتمتة المهام المتكررة.', 'skill-support-title': 'الدعم الفني', 'skill-support-desc': 'تحسين النظام واستكشاف الأخطاء وإصلاحها بخبرة.', 'skill-data-title': 'البيانات والمهام الإدارية', 'skill-data-desc': 'معالجة بيانات فعالة ومنظمة ودقيقة.', 'skill-research-title': 'البحث', 'skill-research-desc': 'تحليل متعمق وتقارير ثاقبة.', 'skill-gamehack-title': 'اختراق الألعاب', 'skill-gamehack-desc': 'تحليل أمان الألعاب والهندسة العكسية.', 'skill-disclaimer': 'ملاحظة: هذه القائمة ليست شاملة. أنا أزدهر في تعلم تقنيات جديدة ويمكنني التكيف بسرعة مع المتطلبات المحددة لمشروعك.', 'portfolio-title': 'المعرض', 'portfolio-cat-research': '🔍 البحث', 'portfolio-cat-programming': '💻 الكود والبرمجة', 'portfolio-cat-admin': '📊 إداري', 'portfolio-cat-general': '🛠️ المهارات العامة', 'project-qr-title': 'QR Nexus: مولد وماسح ضوئي', 'project-qr-desc': 'أداة ويب شاملة لإنشاء ومسح أنواع مختلفة من رموز QR ، تتميز بسجل تاريخ وواجهة مستخدم نظيفة ومستقبلية.', 'portfolio-disclaimer': 'المشاريع المعروضة هنا مقدمة بموافقة كاملة من عملائي. إذا تغيرت الظروف، يمكن للعملاء التواصل معي للإزالة الفورية أو التعديل.', 'testimonials-title': 'الشهادات', 'testimonial-1-text': '"موثوق وسريع ويفهم ما أحتاجه. لقد قدم JN بالضبط ما وعد به."', 'testimonial-1-title': 'صاحبة عمل', 'testimonial-2-text': '"جعل سير عملي أسرع بثلاث مرات بفضل الأتمتة. مهارات تقنية استثنائية!"', 'testimonial-2-title': 'مؤسس شركة ناشئة', 'contact-title': 'اتصل بي', 'contact-email': 'البريد الإلكتروني', 'contact-facebook': 'فيسبوك', 'contact-instagram': 'انستغرام', 'contact-linkedin': 'لينكد إن', 'portfolio-demo': 'عرض حي', 'chatbot-title': 'مساعد الذكاء الاصطناعي', 'chatbot-welcome': 'مرحباً! أنا مساعد JN الذكاء الاصطناعي. اسألني عن مهاراته أو مشاريعه أو كيفية التواصل معه.', 'chatbot-error': 'عذراً ، أواجه مشكلة في الاتصال بعقلي الآن. يرجى المحاولة مرة أخرى في وقت لاحق.', 'chatbot-suggestions': ['ما هي مهاراتك؟', 'أخبرني عن مشاريعك', 'كيف يمكنني التواصل معك؟'], 'chatbot-response-contact': 'يمكنك الاتصال بـ JN عبر <a href="mailto:jobbynoelgonzales@gmail.com" target="_blank">البريد الإلكتروني</a> أو عن طريق النقر على الرموز الأخرى في <a href="#contact">قسم الاتصال</a>.', 'chatbot-response-skills': 'يتخصص JN في تطوير الويب والتشغيل الآلي والبرمجة النصية والدعم الفني. يمكنك الاطلاع على تفاصيل أكثر في <a href="#skills">قسم المهارات</a>.', 'chatbot-response-portfolio': 'يمكنك عرض مشاريعه المميزة في <a href="#portfolio">قسم المعرض</a>. يعد مشروع QR Nexus مثالًا رائعًا على عمله!', 'chatbot-response-testimonials': 'يمكنك قراءة ما يقوله العملاء في <a href="#testimonials">قسم الشهادات</a>.', 'chatbot-response-who': 'هذا هو معرض أعمال JN Gonzales ، وهو متخصص تقني مستقل. يمكنك معرفة المزيد في <a href="#about">قسم عني</a>.', 'chatbot-response-greeting': 'مرحبا! كيف يمكنني مساعدتك اليوم؟', 'chatbot-response-help': 'يمكنك أن تسألني عن مهارات JN أو مشاريعه أو كيفية الاتصال به. يمكن أن تساعد الاقتراحات المقترحة أدناه أيضًا!', 'chatbot-response-default': 'يمكنني الإجابة على الأسئلة المتعلقة بمهارات JN ومشاريعها ومعلومات الاتصال الخاصة بها. حاول أن تسأل شيئًا مثل "ما هي مهاراتك؟" أو تحقق من أحد الاقتراحات المقترحة.', 'footer-text': `&copy; ${new Date().getFullYear()} جي إن جونزاليس. جميع الحقوق محفوظة.` }
         };
 
         let currentLanguage = 'en';
@@ -1195,6 +1726,7 @@
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
         const header = document.querySelector('header');
+        const backToTopBtn = document.getElementById('back-to-top');
 
         function setTheme(theme) {
             body.setAttribute('data-theme', theme);
@@ -1207,11 +1739,23 @@
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
+                    if(typeof translations[lang][key] === 'string') {
+                        element.innerHTML = translations[lang][key];
+                    }
                 }
             });
             document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            const typewriterElement = document.getElementById('typewriter-text');
+            if (typewriterElement) {
+                const typewriterPhrases = (translations[lang]['hero-title'] || translations['en']['hero-title']).split(' | ');
+                startTypewriter(typewriterElement, typewriterPhrases);
+            }
+            
+             if (document.getElementById('chatbot-expanded').classList.contains('active')) {
+                displaySuggestedPrompts();
+            }
         }
 
         function animateProgressBars() {
@@ -1220,6 +1764,44 @@
                 bar.style.width = width + '%';
             });
         }
+
+        // --- TYPEWRITER EFFECT (FIXED) ---
+        function startTypewriter(element, phrases) {
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            // Clear any existing timer to prevent multiple loops from running
+            if (window.typewriterInterval) {
+                clearTimeout(window.typewriterInterval);
+            }
+
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+                let typeSpeed = isDeleting ? 50 : 150;
+
+                if (isDeleting) {
+                    element.textContent = currentPhrase.substring(0, charIndex - 1);
+                    charIndex--;
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                    }
+                } else {
+                    element.textContent = currentPhrase.substring(0, charIndex + 1);
+                    charIndex++;
+                    if (charIndex === currentPhrase.length) {
+                        isDeleting = true;
+                        typeSpeed = 2000; // Pause at end of phrase
+                    }
+                }
+                // Assign the new timeout ID to the global variable so it can be cleared next time
+                window.typewriterInterval = setTimeout(type, typeSpeed);
+            }
+            
+            type(); // Start the new typewriter loop
+        }
+
 
         // --- EVENT LISTENERS ---
 
@@ -1288,6 +1870,17 @@
             } else {
                 header.style.background = `rgba(${currentTheme === 'light' ? '15,15,15' : '0,0,0'}, 0.95)`;
             }
+            
+            if(window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
         // Portfolio category switching
@@ -1301,6 +1894,136 @@
                 document.getElementById(targetCategory).classList.add('active');
             });
         });
+        
+        // Video hover play/pause
+        document.querySelectorAll('.project-card').forEach(card => {
+            const video = card.querySelector('video');
+            if (video) {
+                card.addEventListener('mouseenter', () => {
+                    video.play().catch(e => console.log("Hover play prevented by browser."));
+                });
+                card.addEventListener('mouseleave', () => {
+                    video.pause();
+                });
+            }
+        });
+
+        // --- AI CHATBOT LOGIC (FIXED) ---
+        const chatbotMinimized = document.getElementById('chatbot-minimized');
+        const chatbotExpanded = document.getElementById('chatbot-expanded');
+        const chatbotCloseBtn = document.getElementById('chatbot-close');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSendBtn = document.getElementById('chatbot-send');
+        const suggestedPromptsContainer = document.getElementById('suggested-prompts');
+        
+        function addMessage(text, sender, isHTML = false) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            
+            if (sender === 'loading') {
+                messageElement.innerHTML = `<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+            } else {
+                if(isHTML) {
+                    messageElement.innerHTML = text;
+                } else {
+                    messageElement.textContent = text;
+                }
+            }
+            
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function getAIResponse(userInput) {
+            const input = userInput.toLowerCase();
+            const currentResponses = translations[currentLanguage] || translations['en'];
+
+            // More specific keyword matching
+            const knowledgeBase = {
+                contact: { keywords: ["contact", "email", "linkedin", "social", "touch", "connect"], response: currentResponses['chatbot-response-contact'] },
+                skills: { keywords: ["skill", "proficient", "what can you do", "abilities", "technologies"], response: currentResponses['chatbot-response-skills'] },
+                portfolio: { keywords: ["portfolio", "work", "project", "qr", "nexus"], response: currentResponses['chatbot-response-portfolio'] },
+                testimonials: { keywords: ["testimonial", "review", "feedback", "clients say"], response: currentResponses['chatbot-response-testimonials'] },
+                who: { keywords: ["who are you", "about", "your name", "experience"], response: currentResponses['chatbot-response-who'] },
+                greetings: { keywords: ["hello", "hi", "hey", "greetings"], response: currentResponses['chatbot-response-greeting'] },
+                help: { keywords: ["help", "options", "menu"], response: currentResponses['chatbot-response-help'] }
+            };
+
+            for (const key in knowledgeBase) {
+                if (knowledgeBase[key].keywords.some(keyword => input.includes(keyword))) {
+                    return knowledgeBase[key].response;
+                }
+            }
+
+            return currentResponses['chatbot-response-default'];
+        }
+
+
+        function handleSendMessage() {
+            const userInput = chatbotInput.value.trim();
+            if (userInput === "") return;
+
+            addMessage(userInput, 'user');
+            chatbotInput.value = "";
+            chatbotInput.style.height = '40px';
+            chatbotSendBtn.disabled = true;
+            suggestedPromptsContainer.innerHTML = '';
+
+            addMessage('', 'loading');
+
+            setTimeout(() => {
+                document.querySelector('.message.loading').remove();
+                const aiResponse = getAIResponse(userInput);
+                addMessage(aiResponse, 'assistant', true); // Use isHTML for link rendering
+                chatbotSendBtn.disabled = false;
+            }, 1000 + Math.random() * 500);
+        }
+        
+        function displaySuggestedPrompts() {
+            const prompts = translations[currentLanguage]['chatbot-suggestions'];
+            suggestedPromptsContainer.innerHTML = '';
+            prompts.forEach(promptText => {
+                const chip = document.createElement('div');
+                chip.className = 'prompt-chip';
+                chip.textContent = promptText;
+                chip.onclick = () => {
+                    chatbotInput.value = promptText;
+                    handleSendMessage();
+                };
+                suggestedPromptsContainer.appendChild(chip);
+            });
+        }
+
+        chatbotMinimized.addEventListener('click', () => {
+            chatbotExpanded.classList.remove('hidden');
+            setTimeout(() => chatbotExpanded.classList.add('active'), 10);
+            chatbotMinimized.classList.add('hidden');
+            if (chatbotMessages.children.length <= 1) { // Only show prompts if conversation hasn't started
+                 displaySuggestedPrompts();
+            }
+        });
+
+        chatbotCloseBtn.addEventListener('click', () => {
+            chatbotExpanded.classList.remove('active');
+            setTimeout(() => {
+                chatbotExpanded.classList.add('hidden');
+                chatbotMinimized.classList.remove('hidden');
+            }, 300);
+        });
+        
+        chatbotSendBtn.addEventListener('click', handleSendMessage);
+        chatbotInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMessage();
+            }
+        });
+        
+        chatbotInput.addEventListener('input', () => {
+            chatbotInput.style.height = 'auto';
+            chatbotInput.style.height = (chatbotInput.scrollHeight) + 'px';
+        });
 
         // --- INITIALIZATION ---
 
@@ -1312,14 +2035,20 @@
         const savedLanguage = localStorage.getItem('language');
         if (savedLanguage && translations[savedLanguage]) {
             currentLanguage = savedLanguage;
-            translatePage(savedLanguage);
             const savedLangItem = document.querySelector(`[data-lang="${savedLanguage}"]`);
             if (savedLangItem) {
                 currentLangElement.textContent = savedLangItem.textContent;
             }
         }
+        
+        translatePage(currentLanguage);
+        
+        setTimeout(() => {
+            const welcomeMessage = (translations[currentLanguage] && translations[currentLanguage]['chatbot-welcome']) || translations['en']['chatbot-welcome'];
+            addMessage(welcomeMessage, 'assistant');
+        }, 1000);
 
-        console.log('🚀 JN Gonzales Portfolio v2.4 Loaded Successfully!');
+        console.log('🚀 JN Gonzales Portfolio v3.1 Loaded Successfully!');
     </script>
 </body>
 </html>
