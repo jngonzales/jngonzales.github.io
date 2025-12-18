@@ -28,6 +28,9 @@
             --shadow: rgba(0, 212, 255, 0.1);
             --gradient: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
             --tech-glow: 0 0 20px rgba(0, 212, 255, 0.3);
+            --scrollbar-track: #1a1a1a;
+            --scrollbar-thumb: linear-gradient(180deg, #00d4ff, #0099cc);
+            --scrollbar-thumb-hover: linear-gradient(180deg, #00e5ff, #00d4ff);
         }
 
         [data-theme="dark"] {
@@ -45,6 +48,9 @@
             --shadow: rgba(255, 107, 53, 0.2);
             --gradient: linear-gradient(135deg, #ff6b35 0%, #cc4400 100%);
             --tech-glow: 0 0 20px rgba(255, 107, 53, 0.4);
+            --scrollbar-track: #0a0a0a;
+            --scrollbar-thumb: linear-gradient(180deg, #ff6b35, #ff4500);
+            --scrollbar-thumb-hover: linear-gradient(180deg, #ff8c42, #ff6b35);
         }
 
         * {
@@ -1438,12 +1444,6 @@
             display: none !important;
         }
 
-        /* Global Scrollbar Styling - Theme Aware */
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent-primary) var(--bg-secondary);
-        }
-
         /* Webkit (Chrome, Safari, Edge) Scrollbar Styling */
         ::-webkit-scrollbar {
             width: 10px;
@@ -1451,45 +1451,36 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+            background: var(--scrollbar-track);
             border-radius: 10px;
             margin: 2px;
         }
 
-        /* Light theme - Cyan gradient scrollbar */
+        ::-webkit-scrollbar-corner {
+            background: var(--scrollbar-track);
+        }
+
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #00d4ff, #0099cc);
+            background: var(--scrollbar-thumb);
             border-radius: 10px;
-            border: 2px solid var(--bg-secondary);
+            border: 2px solid var(--scrollbar-track);
             transition: all 0.3s ease;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #00e5ff, #00d4ff);
+            background: var(--scrollbar-thumb-hover);
             border-color: var(--bg-primary);
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        /* Dark theme - Orange/Neon gradient scrollbar */
-        [data-theme="dark"] ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #ff6b35, #cc4400);
-            border-radius: 10px;
-            border: 2px solid var(--bg-secondary);
-        }
-
-        [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #ff7f50, #ff6b35);
-            border-color: var(--bg-primary);
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
         ::-webkit-scrollbar-thumb:active {
             background: var(--gradient);
         }
 
-        /* Scrollbar corner */
-        ::-webkit-scrollbar-corner {
-            background: var(--bg-secondary);
+        /* Firefox Scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-primary) var(--scrollbar-track);
         }
 
         /* Specific scrollbar for modal and chatbot */
@@ -1594,48 +1585,6 @@
             color: var(--text-secondary);
             line-height: 1.6;
             font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .certificate-links {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .certificate-links a {
-            padding: 0.5rem 1rem;
-            background: var(--gradient);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .certificate-links a:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--tech-glow);
-        }
-
-        .cert-download {
-            background: var(--gradient) !important;
-        }
-
-        .cert-verify {
-            background: transparent !important;
-            border: 2px solid var(--accent-primary);
-            color: var(--accent-primary) !important;
-        }
-
-        .cert-verify:hover {
-            background: var(--accent-primary) !important;
-            color: white !important;
         }
 
         .view-all-certificates-btn {
@@ -1775,16 +1724,6 @@
 
         .modal-certificate-card .certificate-description {
             font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-certificate-card .certificate-links {
-            margin-top: 0.75rem;
-        }
-
-        .modal-certificate-card .certificate-links a {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.85rem;
         }
 
         /* Mobile Responsiveness */
@@ -1905,7 +1844,7 @@
 
     </style>
 </head>
-<body data-theme="dark">
+<body>
     <canvas id="bg-canvas"></canvas>
 
     <header>
@@ -2304,10 +2243,9 @@
                             <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002c-.114.06-.227.119-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/><path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.711 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286.921.304 1.83.634 2.726.99v1.27a1.5 1.5 0 0 0-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.66a6.727 6.727 0 0 0 .551-1.607 1.5 1.5 0 0 0 .14-2.67v-.645a48.549 48.549 0 0 1 3.44 1.667 2.25 2.25 0 0 0 2.12 0Z"/><path d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z"/>
                         </svg>
                     </div>
-                    <h3>CS50: Introduction to Computer Science</h3>
+                    <h3>CS50's Introduction to Computer Science</h3>
                     <p class="certificate-issuer">Harvard University</p>
-                    <p class="certificate-date">Completed: 2024</p>
-                    <p class="certificate-description">Rigorous introduction to computer science covering algorithms, data structures, software engineering, and web development using C, Python, SQL, and JavaScript.</p>
+                    <p class="certificate-date">Issued: 2024</p>
                     <div class="certificate-links">
                         <a href="Certs/CS50 Computer Science Harvard.pdf" target="_blank" class="cert-download">View PDF</a>
                     </div>
@@ -2319,10 +2257,9 @@
                             <path fill-rule="evenodd" d="M2.25 6a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V6Zm3.97.97a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06l-2.25 2.25a.75.75 0 0 1-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 0 1 0-1.06Zm4.28 4.28a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" clip-rule="evenodd"/>
                         </svg>
                     </div>
-                    <h3>Software Engineer Certificate</h3>
+                    <h3>Software Engineer</h3>
                     <p class="certificate-issuer">HackerRank</p>
-                    <p class="certificate-date">Completed: 2024</p>
-                    <p class="certificate-description">Comprehensive software engineering certification covering algorithms, data structures, object-oriented programming, and problem-solving techniques.</p>
+                    <p class="certificate-date">Issued: 2024</p>
                     <div class="certificate-links">
                         <a href="Certs/software_engineer certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                     </div>
@@ -2336,8 +2273,7 @@
                     </div>
                     <h3>CS50's Introduction to Programming with Python</h3>
                     <p class="certificate-issuer">Harvard University</p>
-                    <p class="certificate-date">Completed: 2024</p>
-                    <p class="certificate-description">In-depth Python programming course covering functions, variables, conditionals, loops, exceptions, libraries, unit tests, file I/O, and regular expressions.</p>
+                    <p class="certificate-date">Issued: 2024</p>
                     <div class="certificate-links">
                         <a href="Certs/CS50 Python Harvard.pdf" target="_blank" class="cert-download">View PDF</a>
                     </div>
@@ -2360,20 +2296,20 @@
             <div class="modal-body">
                 <div class="modal-certificates-grid">
                     <article class="modal-certificate-card">
-                        <h4>CS50: Introduction to Computer Science</h4>
+                        <h4>CS50's Introduction to Computer Science</h4>
                         <p class="certificate-issuer">Harvard University</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">Rigorous introduction to computer science covering algorithms, data structures, software engineering, and web development.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Harvard's introduction to computer science and the art of programming.</p>
                         <div class="certificate-links">
                             <a href="Certs/CS50 Computer Science Harvard.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
                     </article>
                     
                     <article class="modal-certificate-card">
-                        <h4>Software Engineer Certificate</h4>
+                        <h4>Software Engineer</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">Comprehensive software engineering certification covering algorithms, data structures, and problem-solving techniques.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Certification demonstrating proficiency in software engineering principles and practices.</p>
                         <div class="certificate-links">
                             <a href="Certs/software_engineer certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2382,8 +2318,8 @@
                     <article class="modal-certificate-card">
                         <h4>CS50's Introduction to Programming with Python</h4>
                         <p class="certificate-issuer">Harvard University</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">In-depth Python programming covering functions, loops, exceptions, libraries, unit tests, and file I/O.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Harvard's introduction to programming using Python.</p>
                         <div class="certificate-links">
                             <a href="Certs/CS50 Python Harvard.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2392,8 +2328,8 @@
                     <article class="modal-certificate-card">
                         <h4>JavaScript (Intermediate)</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">Intermediate JavaScript certification demonstrating proficiency in ES6+, async programming, and modern JavaScript concepts.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Intermediate-level JavaScript programming certification.</p>
                         <div class="certificate-links">
                             <a href="Certs/javascript_intermediate certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2402,8 +2338,8 @@
                     <article class="modal-certificate-card">
                         <h4>SQL (Advanced)</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">Advanced SQL certification covering complex queries, optimization, window functions, and database design.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Advanced SQL database management and query optimization.</p>
                         <div class="certificate-links">
                             <a href="Certs/sql_advanced certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2412,8 +2348,8 @@
                     <article class="modal-certificate-card">
                         <h4>SQL (Intermediate)</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">Intermediate SQL certification demonstrating skills in joins, subqueries, aggregations, and data manipulation.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Intermediate SQL database queries and data manipulation.</p>
                         <div class="certificate-links">
                             <a href="Certs/sql_intermediate certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2422,8 +2358,8 @@
                     <article class="modal-certificate-card">
                         <h4>Problem Solving (Intermediate)</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">Problem-solving certification demonstrating algorithmic thinking and data structure implementation skills.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Algorithmic problem solving and data structures proficiency.</p>
                         <div class="certificate-links">
                             <a href="Certs/problem_solving_intermediate certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2432,8 +2368,8 @@
                     <article class="modal-certificate-card">
                         <h4>REST API (Intermediate)</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">REST API certification covering API design, HTTP methods, authentication, and RESTful architecture principles.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">RESTful API design and implementation best practices.</p>
                         <div class="certificate-links">
                             <a href="Certs/rest_api_intermediate certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2442,18 +2378,18 @@
                     <article class="modal-certificate-card">
                         <h4>Go (Intermediate)</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">Intermediate Go programming certification demonstrating proficiency in goroutines, channels, and Go best practices.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Intermediate Go programming language proficiency.</p>
                         <div class="certificate-links">
                             <a href="Certs/golang_intermediate certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
                     </article>
                     
                     <article class="modal-certificate-card">
-                        <h4>CSS Certification</h4>
+                        <h4>CSS</h4>
                         <p class="certificate-issuer">HackerRank</p>
-                        <p class="certificate-date">Completed: 2024</p>
-                        <p class="certificate-description">CSS certification covering modern styling techniques, flexbox, grid, animations, and responsive design.</p>
+                        <p class="certificate-date">Issued: 2024</p>
+                        <p class="certificate-description">Cascading Style Sheets design and layout proficiency.</p>
                         <div class="certificate-links">
                             <a href="Certs/css certificate.pdf" target="_blank" class="cert-download">View PDF</a>
                         </div>
@@ -2553,7 +2489,7 @@
 
     <script>
         const translations = {
-            en: { 'light': 'Light', 'dark': 'Dark', 'nav-about': 'About', 'nav-skills': 'Skills', 'nav-portfolio': 'Portfolio', 'nav-certificates': 'Certificates', 'nav-contact': 'Contact', 'hero-name': 'JN Gonzales', 'hero-title': 'Technology Solutions Specialist | Digital Innovation Expert | Professional Consultant', 'hero-tagline': '"Transforming ideas into innovative digital solutions."', 'hero-skills': 'Web Development • Automation • Technical Solutions • Digital Innovation', 'hero-cta-work': 'View My Work', 'hero-cta-contact': 'Get In Touch', 'about-title': 'About Me', 'certificates-title': 'Certificates', 'view-all-certificates': 'View All 10 Certificates', 'all-certificates-title': 'All Certificates',             'about-text': 'I am a dedicated technology solutions specialist with extensive experience in software development, system automation, and digital transformation. My expertise encompasses web development, process optimization, and technical consulting, delivering innovative solutions that drive business efficiency and growth. I collaborate closely with clients to understand their unique challenges and implement tailored technological solutions that exceed expectations.', 'skills-title': 'Skills', 'skill-web-dev-title': 'Web Development', 'skill-web-dev-desc': 'Building responsive, modern websites and applications.', 'skill-automation-title': 'Automation & Scripting', 'skill-automation-desc': 'Creating smart scripts to automate repetitive tasks.', 'skill-support-title': 'Technical Support', 'skill-support-desc': 'System optimization and expert troubleshooting.', 'skill-data-title': 'Data & Admin Tasks', 'skill-data-desc': 'Efficient, organized, and accurate data handling.', 'skill-research-title': 'Research', 'skill-research-desc': 'In-depth analysis and insightful reporting.', 'skill-gamehack-title': 'Game Hacking', 'skill-gamehack-desc': 'Game security analysis and reverse engineering.', 'skill-disclaimer': 'These are just some of my skills— I’m always learning and can quickly pick up new technologies to meet your project’s specific requirements.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Research', 'portfolio-cat-programming': '💻 Code & Programming', 'portfolio-cat-admin': '📊 Administrative', 'portfolio-cat-general': '🛠️ General Skills', 'project-qr-title': 'QR Nexus: Generator & Scanner', 'project-qr-desc': 'A comprehensive web tool for creating and scanning various QR code types, featuring a history log and clean, futuristic UI.', 'portfolio-disclaimer': 'Projects showcased here are presented with the full consent of my clients. If circumstances change, clients may reach out for immediate removal or adjustment.', 'testimonials-title': 'Testimonials', 'testimonial-1-text': '"Reliable, fast, and understands what I need. JN delivered exactly what was promised."', 'testimonial-1-title': 'Business Owner', 'testimonial-2-text': '"Made my workflow 3x faster with automation. Exceptional technical skills!"', 'testimonial-2-title': 'Startup Founder', 'contact-title': 'Contact Me', 'contact-email': 'Email', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Live Demo', 'chatbot-title': 'AI Assistant', 'chatbot-welcome': 'Hello! I am JN\'s AI assistant. Ask me about his skills, projects, or how to get in touch!', 'chatbot-error': 'Sorry, I\'m having trouble connecting to my brain right now. Please try again later.', 'chatbot-suggestions': ['What are your skills?', 'Tell me about your projects', 'How can I contact you?'], 'chatbot-response-contact': 'You can contact JN via <a href="mailto:jngonzales.dev@gmail.com" target="_blank">Email</a> or by clicking the other icons in the <a href="#contact">Contact Section</a>.', 'chatbot-response-skills': 'JN specializes in Web Development, Automation & Scripting, and Technical Support. You can see a more detailed breakdown in the <a href="#skills">Skills Section</a>.', 'chatbot-response-portfolio': 'You can view his featured projects in the <a href="#portfolio">Portfolio Section</a>. The QR Nexus project is a great example of his work!', 'chatbot-response-testimonials': 'You can read what clients have to say in the <a href="#testimonials">Testimonials Section</a>.', 'chatbot-response-who': 'This is the portfolio for JN Gonzales, a freelance tech specialist. You can learn more in the <a href="#about">About Me Section</a>.', 'chatbot-response-greeting': 'Hello! How can I help you today?', 'chatbot-response-help': 'You can ask me about JN\'s skills, projects, or how to contact him. The suggested prompts below can also help!', 'chatbot-response-default': 'I can answer questions about JN\'s skills, projects, and contact information. Try asking something like "What are your skills?" or check out one of the suggested prompts.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. All Rights Reserved.` },
+            en: { 'light': 'Light', 'dark': 'Dark', 'nav-about': 'About', 'nav-skills': 'Skills', 'nav-portfolio': 'Portfolio', 'nav-certificates': 'Certificates', 'nav-contact': 'Contact', 'hero-name': 'JN Gonzales', 'hero-title': 'Technology Solutions Specialist | Digital Innovation Expert | Professional Consultant', 'hero-tagline': '"Transforming ideas into innovative digital solutions."', 'hero-skills': 'Web Development • Automation • Technical Solutions • Digital Innovation', 'hero-cta-work': 'View My Work', 'hero-cta-contact': 'Get In Touch', 'about-title': 'About Me', 'certificates-title': 'Certificates', 'view-all-certificates': 'View All Certificates', 'all-certificates-title': 'All Certificates',             'about-text': 'I am a dedicated technology solutions specialist with extensive experience in software development, system automation, and digital transformation. My expertise encompasses web development, process optimization, and technical consulting, delivering innovative solutions that drive business efficiency and growth. I collaborate closely with clients to understand their unique challenges and implement tailored technological solutions that exceed expectations.', 'skills-title': 'Skills', 'skill-web-dev-title': 'Web Development', 'skill-web-dev-desc': 'Building responsive, modern websites and applications.', 'skill-automation-title': 'Automation & Scripting', 'skill-automation-desc': 'Creating smart scripts to automate repetitive tasks.', 'skill-support-title': 'Technical Support', 'skill-support-desc': 'System optimization and expert troubleshooting.', 'skill-data-title': 'Data & Admin Tasks', 'skill-data-desc': 'Efficient, organized, and accurate data handling.', 'skill-research-title': 'Research', 'skill-research-desc': 'In-depth analysis and insightful reporting.', 'skill-gamehack-title': 'Game Hacking', 'skill-gamehack-desc': 'Game security analysis and reverse engineering.', 'skill-disclaimer': 'These are just some of my skills— I’m always learning and can quickly pick up new technologies to meet your project’s specific requirements.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Research', 'portfolio-cat-programming': '💻 Code & Programming', 'portfolio-cat-admin': '📊 Administrative', 'portfolio-cat-general': '🛠️ General Skills', 'project-qr-title': 'QR Nexus: Generator & Scanner', 'project-qr-desc': 'A comprehensive web tool for creating and scanning various QR code types, featuring a history log and clean, futuristic UI.', 'portfolio-disclaimer': 'Projects showcased here are presented with the full consent of my clients. If circumstances change, clients may reach out for immediate removal or adjustment.', 'testimonials-title': 'Testimonials', 'testimonial-1-text': '"Reliable, fast, and understands what I need. JN delivered exactly what was promised."', 'testimonial-1-title': 'Business Owner', 'testimonial-2-text': '"Made my workflow 3x faster with automation. Exceptional technical skills!"', 'testimonial-2-title': 'Startup Founder', 'contact-title': 'Contact Me', 'contact-email': 'Email', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Live Demo', 'chatbot-title': 'AI Assistant', 'chatbot-welcome': 'Hello! I am JN\'s AI assistant. Ask me about his skills, projects, or how to get in touch!', 'chatbot-error': 'Sorry, I\'m having trouble connecting to my brain right now. Please try again later.', 'chatbot-suggestions': ['What are your skills?', 'Tell me about your projects', 'How can I contact you?'], 'chatbot-response-contact': 'You can contact JN via <a href="mailto:jngonzales.dev@gmail.com" target="_blank">Email</a> or by clicking the other icons in the <a href="#contact">Contact Section</a>.', 'chatbot-response-skills': 'JN specializes in Web Development, Automation & Scripting, and Technical Support. You can see a more detailed breakdown in the <a href="#skills">Skills Section</a>.', 'chatbot-response-portfolio': 'You can view his featured projects in the <a href="#portfolio">Portfolio Section</a>. The QR Nexus project is a great example of his work!', 'chatbot-response-testimonials': 'You can read what clients have to say in the <a href="#testimonials">Testimonials Section</a>.', 'chatbot-response-who': 'This is the portfolio for JN Gonzales, a freelance tech specialist. You can learn more in the <a href="#about">About Me Section</a>.', 'chatbot-response-greeting': 'Hello! How can I help you today?', 'chatbot-response-help': 'You can ask me about JN\'s skills, projects, or how to contact him. The suggested prompts below can also help!', 'chatbot-response-default': 'I can answer questions about JN\'s skills, projects, and contact information. Try asking something like "What are your skills?" or check out one of the suggested prompts.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. All Rights Reserved.` },
             es: { 'light': 'Claro', 'dark': 'Oscuro', 'nav-about': 'Sobre Mí', 'nav-skills': 'Habilidades', 'nav-portfolio': 'Portafolio', 'nav-contact': 'Contacto', 'hero-name': 'JN Gonzales', 'hero-title': 'Especialista Técnico Freelance | Proveedor de Soluciones Digitales | Solucionador de Problemas', 'hero-tagline': '"Convierto ideas en soluciones digitales eficientes."', 'hero-skills': 'Codificación • Soporte Técnico • Resolución de Problemas Digitales', 'hero-cta-work': 'Ver Mi Trabajo', 'hero-cta-contact': 'Contáctame', 'about-title': 'Sobre Mí', 'about-text': 'Soy un especialista técnico freelance orientado a resultados con experiencia en codificación, resolución de problemas y entrega de una amplia gama de soluciones digitales. Ya sea construyendo un sitio web, automatizando tareas o brindando soporte técnico, me enfoco en crear resultados eficientes, prácticos y confiables.', 'skills-title': 'Habilidades', 'skill-web-dev-title': 'Desarrollo Web', 'skill-web-dev-desc': 'Construcción de sitios web y aplicaciones modernas y responsivas.', 'skill-automation-title': 'Automatización y Scripts', 'skill-automation-desc': 'Creación de scripts inteligentes para automatizar tareas repetitivas.', 'skill-support-title': 'Soporte Técnico', 'skill-support-desc': 'Optimización de sistemas y resolución de problemas experta.', 'skill-data-title': 'Datos y Tareas Administrativas', 'skill-data-desc': 'Manejo de datos eficiente, organizado y preciso.', 'skill-research-title': 'Investigación', 'skill-research-desc': 'Análisis en profundidad e informes perspicaces.', 'skill-gamehack-title': 'Hacking de Juegos', 'skill-gamehack-desc': 'Análisis de seguridad de juegos e ingeniería inversa.', 'skill-disclaimer': 'Estas son solo algunas de mis habilidades. Siempre estoy aprendiendo y puedo asimilar rápidamente nuevas tecnologías para cumplir con los requisitos específicos de su proyecto.', 'portfolio-title': 'Portafolio', 'portfolio-cat-research': '🔍 Investigación', 'portfolio-cat-programming': '💻 Código y Programación', 'portfolio-cat-admin': '📊 Administrativo', 'portfolio-cat-general': '🛠️ Habilidades Generales', 'project-qr-title': 'QR Nexus: Generador y Escáner', 'project-qr-desc': 'Una herramienta web completa para crear y escanear varios tipos de códigos QR, con un registro de historial y una interfaz de usuario limpia y futurista.', 'portfolio-disclaimer': 'Los proyectos mostrados aquí se presentan con el pleno consentimiento de mis clientes. Si las circunstancias cambian, los clientes pueden contactarme para su eliminación o ajuste inmediato.', 'testimonials-title': 'Testimonios', 'testimonial-1-text': '"Confiable, rápido y entiende lo que necesito. JN entregó exactamente lo que prometió."', 'testimonial-1-title': 'Dueña de Negocio', 'testimonial-2-text': '"Hizo mi flujo de trabajo 3 veces más rápido con la automatización. ¡Habilidades técnicas excepcionales!"', 'testimonial-2-title': 'Fundador de Startup', 'contact-title': 'Contáctame', 'contact-email': 'Correo Electrónico', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Demo en Vivo', 'chatbot-title': 'Asistente de IA', 'chatbot-welcome': '¡Hola! Soy el asistente de IA de JN. Pregúntame sobre sus habilidades, proyectos o cómo contactarlo.', 'chatbot-error': 'Lo siento, estoy teniendo problemas para conectarme a mi cerebro en este momento. Por favor, inténtalo de nuevo más tarde.', 'chatbot-suggestions': ['¿Cuáles son tus habilidades?', 'Háblame de tus proyectos', '¿Cómo puedo contactarte?'], 'chatbot-response-contact': 'Puedes contactar a JN por <a href="mailto:jngonzales.dev@gmail.com" target="_blank">correo electrónico</a> o haciendo clic en los otros iconos en la <a href="#contact">Sección de Contacto</a>.', 'chatbot-response-skills': 'JN se especializa en Desarrollo Web, Automatización y Scripting, y Soporte Técnico. Puedes ver un desglose más detallado en la <a href="#skills">Sección de Habilidades</a>.', 'chatbot-response-portfolio': 'Puedes ver sus proyectos destacados en la <a href="#portfolio">Sección de Portafolio</a>. ¡El proyecto QR Nexus es un gran ejemplo de su trabajo!', 'chatbot-response-testimonials': 'Puedes leer lo que los clientes dicen en la <a href="#testimonials">Sección de Testimonios</a>.', 'chatbot-response-who': 'Este es el portafolio de JN Gonzales, un especialista técnico freelance. Puedes aprender más en la <a href="#about">Sección Sobre Mí</a>.', 'chatbot-response-greeting': '¡Hola! ¿En qué puedo ayudarte hoy?', 'chatbot-response-help': 'Puedes preguntarme sobre las habilidades, proyectos o cómo contactar a JN. ¡Las sugerencias a continuación también pueden ayudar!', 'chatbot-response-default': 'Puedo responder preguntas sobre las habilidades, proyectos e información de contacto de JN. Intenta preguntar algo como "¿Cuáles son tus habilidades?" o mira una de las sugerencias.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Todos los derechos reservados.` },
             fr: { 'light': 'Clair', 'dark': 'Sombre', 'nav-about': 'À propos', 'nav-skills': 'Compétences', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Contact', 'hero-name': 'JN Gonzales', 'hero-title': 'Spécialiste Technique Freelance | Fournisseur de Solutions Numériques | Résolveur de Problèmes', 'hero-tagline': '"Je transforme les idées en solutions numériques efficaces."', 'hero-skills': 'Codage • Support Technique • Résolution de Problèmes Numériques', 'hero-cta-work': 'Voir Mon Travail', 'hero-cta-contact': 'Me Contacter', 'about-title': 'À propos de Moi', 'about-text': 'Je suis un spécialiste technique freelance axé sur les résultats avec une expertise en codage, dépannage et livraison d\'une large gamme de solutions numériques. Qu\'il s\'agisse de construire un site web, d\'automatiser des tâches ou de fournir un support technique, je me concentre sur la création de résultats efficaces, pratiques et fiables.', 'skills-title': 'Compétences', 'skill-web-dev-title': 'Développement Web', 'skill-web-dev-desc': 'Création de sites web et d\'applications modernes et réactifs.', 'skill-automation-title': 'Automatisation et Scripting', 'skill-automation-desc': 'Création de scripts intelligents pour automatiser les tâches répétitives.', 'skill-support-title': 'Support Technique', 'skill-support-desc': 'Optimisation du système et dépannage expert.', 'skill-data-title': 'Données et Tâches Administratives', 'skill-data-desc': 'Gestion des données efficace, organisée et précise.', 'skill-research-title': 'Recherche', 'skill-research-desc': 'Analyse approfondie et rapports pertinents.', 'skill-gamehack-title': 'Piratage de Jeux', 'skill-gamehack-desc': 'Analyse de la sécurité des jeux et ingénierie inverse.', 'skill-disclaimer': 'Note : Cette liste n\'est pas exhaustive. Je m\'épanouis en apprenant de nouvelles technologies et je peux m\'adapter rapidement aux besoins spécifiques de votre projet.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Recherche', 'portfolio-cat-programming': '💻 Code & Programmation', 'portfolio-cat-admin': '📊 Administratif', 'portfolio-cat-general': '🛠️ Compétences Générales', 'project-qr-title': 'QR Nexus : Générateur & Scanner', 'project-qr-desc': 'Un outil Web complet pour créer et numériser différents types de codes QR, doté d\'un journal d\'historique et d\'une interface utilisateur propre et futuriste.', 'portfolio-disclaimer': 'Les projets présentés ici le sont avec le consentement total de mes clients. Si les circonstances changent, les clients peuvent me contacter pour un retrait ou un ajustement immédiat.', 'testimonials-title': 'Témoignages', 'testimonial-1-text': '"Fiable, rapide, et comprend ce dont j\'ai besoin. JN a livré exactement ce qui était promis."', 'testimonial-1-title': 'Propriétaire d\'entreprise', 'testimonial-2-text': '"A rendu mon flux de travail 3 fois plus rapide avec l\'automatisation. Compétences techniques exceptionnelles!"', 'testimonial-2-title': 'Fondateur de Startup', 'contact-title': 'Me Contacter', 'contact-email': 'Email', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Démo en Direct', 'chatbot-title': 'Assistant IA', 'chatbot-welcome': 'Bonjour ! Je suis l\'assistant IA de JN. Demandez-moi sur ses compétences, ses projets, ou comment le contacter.', 'chatbot-error': 'Désolé, j\'ai des difficultés à me connecter à mon cerveau en ce moment. Veuillez réessayer plus tard.', 'chatbot-suggestions': ['Quelles sont vos compétences?', 'Parlez-moi de vos projets', 'Comment puis-je vous contacter?'], 'chatbot-response-contact': 'Vous pouvez contacter JN par <a href="mailto:jngonzales.dev@gmail.com" target="_blank">E-mail</a> ou en cliquant sur les autres icônes dans la <a href="#contact">Section Contact</a>.', 'chatbot-response-skills': 'JN est spécialisé dans le Développement Web, l\'Automatisation et le Scripting, et le Support Technique. Vous pouvez voir une description plus détaillée dans la <a href="#skills">Section Compétences</a>.', 'chatbot-response-portfolio': 'Vous pouvez voir ses projets en vedette dans la <a href="#portfolio">Section Portfolio</a>. Le projet QR Nexus est un excellent exemple de son travail !', 'chatbot-response-testimonials': 'Vous pouvez lire ce que les clients disent dans la <a href="#testimonials">Section Témoignages</a>.', 'chatbot-response-who': 'Ceci est le portfolio de JN Gonzales, un spécialiste technique freelance. Vous pouvez en savoir plus dans la <a href="#about">Section À propos de moi</a>.', 'chatbot-response-greeting': 'Bonjour ! Comment puis-je vous aider aujourd\'hui ?', 'chatbot-response-help': 'Vous pouvez me poser des questions sur les compétences, les projets ou comment contacter JN. Les invites suggérées ci-dessous peuvent également vous aider !', 'chatbot-response-default': 'Je peux répondre aux questions sur les compétences, les projets et les coordonnées de JN. Essayez de demander quelque chose comme "Quelles sont vos compétences ?" ou consultez l\'une des invites suggérées.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Tous droits réservés.` },
             de: { 'light': 'Hell', 'dark': 'Dunkel', 'nav-about': 'Über Mich', 'nav-skills': 'Fähigkeiten', 'nav-portfolio': 'Portfolio', 'nav-contact': 'Kontakt', 'hero-name': 'JN Gonzales', 'hero-title': 'Freiberuflicher Tech-Spezialist | Anbieter digitaler Lösungen | Problemlöser', 'hero-tagline': '"Ich verwandle Ideen in effiziente digitale Lösungen."', 'hero-skills': 'Codierung • Technischer Support • Digitale Problemlösung', 'hero-cta-work': 'Meine Arbeit ansehen', 'hero-cta-contact': 'Kontakt aufnehmen', 'about-title': 'Über Mich', 'about-text': 'Ich bin ein ergebnisorientierter freiberuflicher Tech-Spezialist mit Expertise in Codierung, Fehlerbehebung und der Bereitstellung einer breiten Palette digitaler Lösungen. Ob es um die Erstellung einer Website, die Automatisierung von Aufgaben oder die Bereitstellung von technischem Support geht, ich konzentriere mich auf die Schaffung effizienter, praktischer und zuverlässiger Ergebnisse.', 'skills-title': 'Fähigkeiten', 'skill-web-dev-title': 'Webentwicklung', 'skill-web-dev-desc': 'Erstellung von responsiven, modernen Websites und Anwendungen.', 'skill-automation-title': 'Automatisierung & Scripting', 'skill-automation-desc': 'Erstellung intelligenter Skripte zur Automatisierung wiederkehrender Aufgaben.', 'skill-support-title': 'Technischer Support', 'skill-support-desc': 'Systemoptimierung und fachkundige Fehlerbehebung.', 'skill-data-title': 'Daten & Verwaltungsaufgaben', 'skill-data-desc': 'Effiziente, organisierte und genaue Datenverarbeitung.', 'skill-research-title': 'Forschung', 'skill-research-desc': 'Tiefgehende Analyse und aufschlussreiche Berichterstattung.', 'skill-gamehack-title': 'Game Hacking', 'skill-gamehack-desc': 'Spiel-Sicherheitsanalyse und Reverse Engineering.', 'skill-disclaimer': 'Hinweis: Diese Liste ist nicht vollständig. Ich lerne gerne neue Technologien und kann mich schnell an die spezifischen Anforderungen Ihres Projekts anpassen.', 'portfolio-title': 'Portfolio', 'portfolio-cat-research': '🔍 Forschung', 'portfolio-cat-programming': '💻 Code & Programmierung', 'portfolio-cat-admin': '📊 Administrativ', 'portfolio-cat-general': '🛠️ Allgemeine Fähigkeiten', 'project-qr-title': 'QR Nexus: Generator & Scanner', 'project-qr-desc': 'Ein umfassendes Web-Tool zum Erstellen und Scannen verschiedener QR-Code-Typen mit Verlaufsprotokoll und sauberer, futuristischer Benutzeroberfläche.', 'portfolio-disclaimer': 'Die hier vorgestellten Projekte werden mit der vollen Zustimmung meiner Kunden präsentiert. Sollten sich die Umstände ändern, können Kunden mich für eine sofortige Entfernung oder Anpassung kontaktieren.', 'testimonials-title': 'Referenzen', 'testimonial-1-text': '"Zuverlässig, schnell und versteht, was ich brauche. JN hat genau das geliefert, was versprochen wurde."', 'testimonial-1-title': 'Geschäftsinhaberin', 'testimonial-2-text': '"Hat meinen Arbeitsablauf durch Automatisierung dreimal schneller gemacht. Außergewöhnliche technische Fähigkeiten!"', 'testimonial-2-title': 'Startup-Gründer', 'contact-title': 'Kontaktieren Sie mich', 'contact-email': 'E-Mail', 'contact-facebook': 'Facebook', 'contact-instagram': 'Instagram', 'contact-linkedin': 'LinkedIn', 'portfolio-demo': 'Live-Demo', 'chatbot-title': 'KI-Assistent', 'chatbot-welcome': 'Hallo! Ich bin der KI-Assistent von JN. Fragen Sie mich nach seinen Fähigkeiten, Projekten oder wie Sie ihn kontaktieren können.', 'chatbot-error': 'Entschuldigung, ich habe im Moment Probleme, eine Verbindung zu meinem Gehirn herzustellen. Bitte versuchen Sie es später erneut.', 'chatbot-suggestions': ['Was sind Ihre Fähigkeiten?', 'Erzählen Sie mir von Ihren Projekten', 'Wie kann ich Sie kontaktieren?'], 'chatbot-response-contact': 'Sie können JN per <a href="mailto:jngonzales.dev@gmail.com" target="_blank">E-Mail</a> kontaktieren oder auf die anderen Symbole im <a href="#contact">Kontaktbereich</a> klicken.', 'chatbot-response-skills': 'JN ist spezialisiert auf Webentwicklung, Automatisierung & Scripting und technischen Support. Eine detailliertere Aufschlüsselung finden Sie im <a href="#skills">Fähigkeiten-Bereich</a>.', 'chatbot-response-portfolio': 'Sie können seine vorgestellten Projekte im <a href="#portfolio">Portfolio-Bereich</a> ansehen. Das QR Nexus-Projekt ist ein großartiges Beispiel für seine Arbeit!', 'chatbot-response-testimonials': 'Sie können im <a href="#testimonials">Referenzen-Bereich</a> lesen, was Kunden zu sagen haben.', 'chatbot-response-who': 'Dies ist das Portfolio von JN Gonzales, einem freiberuflichen Tech-Spezialisten. Mehr erfahren Sie im <a href="#about">Über-mich-Bereich</a>.', 'chatbot-response-greeting': 'Hallo! Wie kann ich Ihnen heute helfen?', 'chatbot-response-help': 'Sie können mich nach den Fähigkeiten und Projekten von JN fragen oder wie Sie ihn kontaktieren können. Die vorgeschlagenen Anregungen unten können ebenfalls helfen!', 'chatbot-response-default': 'Ich kann Fragen zu den Fähigkeiten, Projekten und Kontaktinformationen von JN beantworten. Versuchen Sie, etwas wie "Was sind Ihre Fähigkeiten?" zu fragen oder sehen Sie sich eine der vorgeschlagenen Anregungen an.', 'footer-text': `&copy; ${new Date().getFullYear()} JN Gonzales. Alle Rechte vorbehalten.` },
@@ -2568,6 +2504,7 @@
         let currentTheme = 'light';
 
         const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
         const body = document.body;
         const languageDropdown = document.getElementById('languageDropdown');
         const languageMenu = document.getElementById('languageMenu');
@@ -2578,7 +2515,7 @@
         const backToTopBtn = document.getElementById('back-to-top');
 
         function setTheme(theme) {
-            body.setAttribute('data-theme', theme);
+            htmlElement.setAttribute('data-theme', theme);
             themeToggle.classList.toggle('active', theme === 'dark');
             localStorage.setItem('theme', theme);
             currentTheme = theme;
@@ -2887,13 +2824,16 @@
 
         // --- INITIALIZATION ---
 
-const savedTheme = localStorage.getItem('theme');
-// If a theme is saved in local storage, use it. Otherwise, default to 'dark'.
-if (savedTheme) {
-    setTheme(savedTheme);
-} else {
-    setTheme('dark'); // This sets 'dark' as the default for new visitors.
-}
+        // Prevent FOUC (Flash of Unstyled Content)
+        document.body.style.opacity = '1';
+
+        const savedTheme = localStorage.getItem('theme');
+        // If a theme is saved in local storage, use it. Otherwise, default to 'dark'.
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme('dark'); // This sets 'dark' as the default for new visitors.
+        }
 
         const savedLanguage = localStorage.getItem('language');
         if (savedLanguage && translations[savedLanguage]) {
@@ -2953,7 +2893,7 @@ if (savedTheme) {
                     }
                 });
             });
-            observer.observe(document.body, { attributes: true });
+            observer.observe(document.documentElement, { attributes: true });
 
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
@@ -3059,5 +2999,4 @@ if (savedTheme) {
     </script>
 </body>
 </html>
-
 
